@@ -1,6 +1,6 @@
-# ModoViagem
+# Viajário
 
-Fonte: https://www.notion.so/ModoViagem-35050c588c64807194e0c618d889404f
+Fonte original: documento interno de produto.
 
 ## Descricao do produto
 

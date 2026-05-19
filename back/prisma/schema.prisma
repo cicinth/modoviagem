@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TripStatus {
+  proxima
+  finalizada
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  email     String   @unique
+  passwordHash String @map("password_hash")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trips Trip[]
+
+  @@map("users")
+}
+
+model Trip {
+  id                       String     @id @default(uuid()) @db.Uuid
+  userId                   String?    @map("user_id") @db.Uuid
+  name                     String
+  destination              String     @default("")
+  period                   String     @default("")
+  status                   TripStatus @default(proxima)
+  hasInsurance             Boolean    @default(false) @map("has_insurance")
+  insuranceTicket          String     @default("") @map("insurance_ticket")
+  transport                String     @default("")
+  reservationCode          String     @default("") @map("reservation_code")
+  locator                  String     @default("")
+  accommodation            String     @default("")
+  accommodationDates       String     @default("") @map("accommodation_dates")
+  accommodationLink        String     @default("") @map("accommodation_link")
+  accommodationAddress     String     @default("") @map("accommodation_address")
+  accommodationDirections  String     @default("") @map("accommodation_directions")
+  internalTransport        String     @default("") @map("internal_transport")
+  itineraryMarkdown        String     @default("") @map("itinerary_markdown")
+  createdAt                DateTime   @default(now()) @map("created_at")
+  updatedAt                DateTime   @updatedAt @map("updated_at")
+
+  user         User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  imageLinks   TripImageLink[]
+  documents    TripDocument[]
+  tasks        TripTask[]
+  packingItems TripPackingItem[]
+  diaryEntries  TripDiaryEntry[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([updatedAt])
+  @@map("trips")
+}
+
+model TripDiaryEntry {
+  id        String   @id @default(uuid()) @db.Uuid
+  tripId    String   @map("trip_id") @db.Uuid
+  placeType String   @map("place_type")
+  placeName String   @map("place_name")
+  note      String   @default("")
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trip   Trip             @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  photos TripDiaryPhoto[]
+
+  @@index([tripId])
+  @@map("trip_diary_entries")
+}
+
+model TripDiaryPhoto {
+  id            String   @id @default(uuid()) @db.Uuid
+  diaryEntryId  String   @map("diary_entry_id") @db.Uuid
+  url           String
+  caption       String   @default("")
+  position      Int      @default(0)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  diaryEntry TripDiaryEntry @relation(fields: [diaryEntryId], references: [id], onDelete: Cascade)
+
+  @@index([diaryEntryId])
+  @@map("trip_diary_photos")
+}
+
+model TripImageLink {
+  id        String   @id @default(uuid()) @db.Uuid
+  tripId    String   @map("trip_id") @db.Uuid
+  url       String
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@map("trip_image_links")
+}
+
+model TripDocument {
+  id        String   @id @default(uuid()) @db.Uuid
+  tripId    String   @map("trip_id") @db.Uuid
+  title     String
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@map("trip_documents")
+}
+
+model TripTask {
+  id        String   @id @default(uuid()) @db.Uuid
+  tripId    String   @map("trip_id") @db.Uuid
+  text      String
+  done      Boolean  @default(false)
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@map("trip_tasks")
+}
+
+model TripPackingItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  tripId    String   @map("trip_id") @db.Uuid
+  text      String
+  done      Boolean  @default(false)
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+
+  @@index([tripId])
+  @@map("trip_packing_items")
+}

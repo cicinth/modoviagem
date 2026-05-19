@@ -1,15 +1,33 @@
 {
-  "name": "modoviagem-back",
+  "name": "viajario-back",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "docker:up": "docker compose up -d && npm run prisma:migrate && npm run db:seed",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "db:seed": "node scripts/seedDefaultTrips.js",
+    "import:legacy-trips": "node scripts/importLegacyTrips.js"
+  },
+  "prisma": {
+    "seed": "node scripts/seedDefaultTrips.js"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "pg": "^8.21.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prisma": "^7.8.0",
+    "vitest": "^4.1.6"
+  }
 }

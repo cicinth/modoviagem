@@ -51,12 +51,113 @@ button {
   padding: 36px 0 64px;
 }
 
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.auth-shell {
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.auth-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px;
+}
+
+.auth-copy h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3.4rem, 7vw, 6.4rem);
+  line-height: 0.92;
+}
+
+.auth-copy p {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.auth-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.auth-badges span {
+  padding: 8px 10px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-lift);
+}
+
+.auth-card {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: 22px;
+}
+
+.auth-toggle {
+  display: inline-flex;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+}
+
+.auth-toggle button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-right: 2px solid var(--line);
+  background: var(--surface);
+  font-weight: 900;
+}
+
+.auth-toggle button:last-child {
+  border-right: 0;
+}
+
+.auth-toggle button.active {
+  background: var(--passport);
+  color: var(--surface);
+}
+
+.auth-fields {
+  display: grid;
+  gap: 14px;
+}
+
+.auth-actions {
+  justify-content: flex-start;
+}
+
 .detail-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: 28px;
   align-items: end;
   margin-bottom: 24px;
+}
+
+.detail-hero > div:first-child {
+  padding-top: 12px;
 }
 
 .detail-hero h1 {
@@ -463,9 +564,18 @@ button {
   max-width: 760px;
   gap: 7px;
   align-items: center;
-  margin: 14px 0;
+  margin: 20px 0 12px;
+  padding: 8px 0 10px;
   font-size: inherit;
-  line-height: 1;
+  line-height: 1.15;
+  overflow: visible;
+}
+
+.detail-hero .collage-title {
+  max-width: 760px;
+  margin: 20px 0 12px;
+  padding: 8px 0 10px;
+  line-height: 1.15;
 }
 
 .letter {
@@ -613,8 +723,17 @@ button {
   gap: 22px;
 }
 
+.section-heading {
+  display: grid;
+  gap: 8px;
+  align-items: start;
+}
+
 .section-heading h2 {
+  margin: 0;
   font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 
 .form-grid,
@@ -701,6 +820,12 @@ select:focus {
   background: transparent;
   color: var(--passport);
   font-weight: 900;
+}
+
+.section-heading .back-button,
+.detail-hero .back-button {
+  justify-self: start;
+  margin-bottom: 4px;
 }
 
 .moodboard {
@@ -830,9 +955,218 @@ select:focus {
   gap: 12px;
 }
 
+.diary-section {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.diary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.diary-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(46, 42, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(46, 42, 39, 0.04) 1px, transparent 1px),
+    color-mix(in srgb, var(--surface) 88%, var(--memory-rose));
+  background-size: 22px 22px;
+  box-shadow: var(--shadow-paper);
+}
+
+.diary-card-open {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.diary-card-open h3 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.55rem;
+}
+
+.diary-card-open p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.diary-card-chip {
+  width: fit-content;
+  padding: 5px 9px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--aged-gold);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.diary-collage {
+  position: relative;
+  min-height: 260px;
+}
+
+.diary-photo {
+  position: absolute;
+  width: 48%;
+  height: 50%;
+  object-fit: cover;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 7px 8px 0 rgba(46, 42, 39, 0.14);
+}
+
+.diary-photo.photo-1 {
+  top: 0;
+  left: 2%;
+  transform: rotate(-6deg);
+}
+
+.diary-photo.photo-2 {
+  top: 8%;
+  right: 2%;
+  transform: rotate(5deg);
+}
+
+.diary-photo.photo-3 {
+  bottom: 4%;
+  left: 12%;
+  transform: rotate(4deg);
+}
+
+.diary-photo.photo-4 {
+  bottom: 0;
+  right: 8%;
+  transform: rotate(-7deg);
+}
+
+.diary-photo.photo-5 {
+  top: 26%;
+  left: 28%;
+  width: 34%;
+  height: 34%;
+  transform: rotate(3deg);
+}
+
+.diary-more {
+  position: absolute;
+  right: 8%;
+  bottom: 10%;
+  min-width: 74px;
+  min-height: 74px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--passport);
+  color: var(--surface);
+  font-weight: 900;
+  box-shadow: 6px 7px 0 rgba(46, 42, 39, 0.14);
+}
+
+.diary-empty {
+  grid-column: 1 / -1;
+}
+
+.diary-modal,
+.diary-viewer {
+  width: min(880px, 100%);
+}
+
+.diary-editor {
+  display: grid;
+  gap: 16px;
+}
+
+.suggestions {
+  display: grid;
+  gap: 10px;
+}
+
+.suggestions-label {
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-chip {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-rose);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.diary-note {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 2px dashed var(--aged-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--memory-rose));
+  line-height: 1.65;
+}
+
+.diary-note.empty {
+  color: var(--muted);
+}
+
+.diary-full-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.diary-full-photo {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.diary-full-photo img,
+.diary-full-photo .image-placeholder {
+  width: 100%;
+  aspect-ratio: 1.1;
+  object-fit: cover;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: var(--shadow-lift);
+}
+
+.diary-full-photo figcaption {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.diary-viewer-actions {
+  justify-content: flex-end;
+}
+
 .itinerary {
   background:
-    linear-gradient(#ffffff 0 28px, #ece5d7 28px 30px),
+    linear-gradient(#fffdf9 0 28px, #ede4d5 28px 30px),
     var(--surface);
   background-size: 100% 30px;
 }
@@ -843,6 +1177,10 @@ select:focus {
   gap: 16px;
   align-items: start;
   margin-bottom: 16px;
+}
+
+.itinerary-header .actions {
+  justify-content: flex-end;
 }
 
 .itinerary-header h2 {
@@ -865,14 +1203,114 @@ select:focus {
 
 .itinerary-preview {
   display: grid;
+  gap: 10px;
+}
+
+.itinerary-book {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.itinerary-book.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.itinerary-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 650px;
+  padding: 24px 22px;
+  border: 1px solid rgba(46, 42, 39, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(#fffdf9 0 28px, #ede4d5 28px 30px),
+    #fffdf9;
+  background-size: 100% 30px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 252, 247, 0.86),
+    4px 5px 0 rgba(46, 42, 39, 0.08);
+}
+
+.itinerary-column + .itinerary-column {
+  position: relative;
+}
+
+.itinerary-column + .itinerary-column::before {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: -13px;
+  width: 1px;
+  content: "";
+  background: rgba(46, 42, 39, 0.16);
+}
+
+.page-controls {
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.page-controls span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.itinerary-full-page {
+  display: grid;
+  gap: 20px;
+}
+
+.itinerary-full-header {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-paper);
+}
+
+.itinerary-full-header h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.95;
+}
+
+.itinerary-full-header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.itinerary-full-content {
+  max-height: none;
+}
+
+.itinerary-full-content .itinerary-preview {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 0;
 }
 
 .route-title {
-  margin: 26px 0 8px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 18px 0 4px;
+  padding: 2px 0 8px;
+  border-bottom: 1px solid rgba(46, 42, 39, 0.18);
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1;
+  font-size: clamp(1.55rem, 2.6vw, 2.2rem);
+  line-height: 1.08;
 }
 
 .route-title:first-child {
@@ -881,52 +1319,120 @@ select:focus {
 
 .route-subtitle {
   width: fit-content;
-  margin: 14px 0 4px;
-  padding: 7px 12px;
-  border: 2px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-rose);
-  color: var(--terracotta);
-  font-size: 1.15rem;
+  max-width: 100%;
+  margin: 8px 0 2px;
+  padding: 4px 8px;
+  border: 1px solid rgba(46, 42, 39, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 252, 247, 0.72);
+  color: var(--passport);
+  font-size: 0.98rem;
+  font-weight: 900;
 }
 
 .route-small-title {
-  margin: 10px 0 2px;
-  color: var(--passport);
-  font-size: 1rem;
+  width: fit-content;
+  margin: 8px 0 2px;
+  padding: 0;
+  border-bottom: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
   text-transform: uppercase;
+}
+
+.route-title.country {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid rgba(46, 42, 39, 0.22);
+  border-radius: 8px;
+  background: var(--passport);
+  color: var(--surface);
+  box-shadow: 3px 4px 0 rgba(46, 42, 39, 0.1);
+}
+
+.route-title.date {
+  width: fit-content;
+  padding: 6px 10px;
+  border: 1px solid rgba(46, 42, 39, 0.22);
+  border-radius: 999px;
+  background: rgba(201, 162, 93, 0.36);
+  color: var(--ink);
+  font-family: Inter, sans-serif;
+  font-size: clamp(0.92rem, 1.8vw, 1.15rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.route-title.transport,
+.route-subtitle.transport,
+.route-small-title.transport {
+  color: var(--passport);
+}
+
+.route-title.stay,
+.route-subtitle.stay,
+.route-small-title.stay {
+  color: var(--deep-green);
+}
+
+.route-title.food,
+.route-subtitle.food,
+.route-small-title.food {
+  color: var(--terracotta);
+}
+
+.route-title.budget,
+.route-subtitle.budget,
+.route-small-title.budget {
+  color: var(--deep-green);
 }
 
 .route-paragraph {
   margin: 0;
   color: var(--muted);
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.62;
 }
 
 .route-list {
   display: grid;
-  gap: 7px;
+  gap: 6px;
   margin: 0;
-  padding: 12px 14px 12px 34px;
-  border-left: 4px solid var(--aged-gold);
-  border-radius: 8px;
-  background: rgba(255, 252, 247, 0.74);
+  padding: 4px 4px 4px 26px;
+  border-left: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--ink);
+  font-size: 0.94rem;
+  line-height: 1.52;
+}
+
+.route-list.ordered {
+  background: transparent;
 }
 
 .route-list li::marker {
   color: var(--terracotta);
+  font-weight: 900;
+}
+
+.route-list.ordered li::marker {
+  color: var(--passport);
 }
 
 .route-task {
   display: flex;
-  gap: 10px;
-  align-items: center;
-  width: fit-content;
-  padding: 8px 12px;
-  border: 2px dashed rgba(46, 42, 39, 0.36);
-  border-radius: 8px;
-  background: #fff;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.94rem;
+  line-height: 1.45;
 }
 
 .route-task input {
@@ -935,20 +1441,43 @@ select:focus {
   accent-color: var(--deep-green);
 }
 
+.route-note {
+  position: relative;
+  margin: 4px 0;
+  padding: 12px 14px 12px 40px;
+  border: 1px solid rgba(46, 42, 39, 0.18);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-rose) 46%, var(--surface));
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.5;
+  box-shadow: 3px 4px 0 rgba(46, 42, 39, 0.08);
+}
+
+.route-note::before {
+  position: absolute;
+  left: 13px;
+  top: 10px;
+  color: var(--terracotta);
+  content: "✦";
+  font-size: 1.05rem;
+}
+
 .route-divider {
   width: 100%;
-  margin: 14px 0;
+  margin: 18px 0 12px;
   border: 0;
-  border-top: 2px dashed rgba(46, 42, 39, 0.36);
+  border-top: 1px solid rgba(46, 42, 39, 0.18);
 }
 
 .route-table-wrap {
   max-width: 100%;
   overflow-x: auto;
-  border: 2px solid var(--line);
+  border: 1px solid rgba(46, 42, 39, 0.16);
   border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--shadow-lift);
+  background: rgba(255, 252, 247, 0.82);
+  box-shadow: 3px 4px 0 rgba(46, 42, 39, 0.08);
 }
 
 .route-table {
@@ -959,16 +1488,46 @@ select:focus {
 
 .route-table th,
 .route-table td {
-  padding: 10px 12px;
-  border-bottom: 2px solid rgba(46, 42, 39, 0.18);
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(46, 42, 39, 0.13);
+  font-size: 0.9rem;
   text-align: left;
 }
 
 .route-table th {
-  background: var(--passport);
-  color: var(--surface);
-  font-size: 0.8rem;
+  background: rgba(31, 58, 95, 0.08);
+  color: var(--passport);
+  font-size: 0.74rem;
   text-transform: uppercase;
+}
+
+.itinerary-column .route-title {
+  font-size: clamp(1.24rem, 1.8vw, 1.65rem);
+}
+
+.itinerary-column .route-title.country {
+  font-size: 1.02rem;
+}
+
+.itinerary-column .route-title.date {
+  font-size: 0.82rem;
+}
+
+.itinerary-column .route-subtitle {
+  font-size: 0.86rem;
+}
+
+.itinerary-column .route-small-title,
+.itinerary-column .route-table th {
+  font-size: 0.72rem;
+}
+
+.itinerary-column .route-paragraph,
+.itinerary-column .route-list,
+.itinerary-column .route-task,
+.itinerary-column .route-note,
+.itinerary-column .route-table td {
+  font-size: 0.84rem;
 }
 
 .route-table tr:last-child td {
@@ -991,6 +1550,7 @@ select:focus {
 }
 
 @media (max-width: 860px) {
+  .auth-shell,
   .notebook-cover,
   .detail-hero,
   .trip-grid,
@@ -999,6 +1559,27 @@ select:focus {
   .info-grid,
   .moodboard {
     grid-template-columns: 1fr;
+  }
+
+  .auth-copy {
+    padding: 18px 4px 0;
+  }
+
+  .auth-copy h1 {
+    font-size: 3.1rem;
+  }
+
+  .diary-grid,
+  .diary-full-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diary-card {
+    min-height: 0;
+  }
+
+  .diary-collage {
+    min-height: 220px;
   }
 
   .notebook-cover {
@@ -1098,6 +1679,32 @@ select:focus {
     flex-direction: column;
   }
 
+  .itinerary-header .actions {
+    justify-content: stretch;
+  }
+
+  .itinerary-header .actions .button,
+  .page-controls .button {
+    flex: 1;
+  }
+
+  .itinerary-book {
+    grid-template-columns: 1fr;
+  }
+
+  .itinerary-column {
+    min-height: 520px;
+  }
+
+  .itinerary-column + .itinerary-column::before {
+    display: none;
+  }
+
+  .page-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .detail-hero h1 {
     font-size: 3rem;
   }
@@ -1106,5 +1713,41 @@ select:focus {
     min-width: 42px;
     min-height: 52px;
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .auth-page {
+    padding: 18px 12px;
+  }
+
+  .auth-shell {
+    gap: 18px;
+  }
+
+  .auth-card,
+  .auth-copy {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .diary-photo {
+    width: 52%;
+  }
+
+  .diary-photo.photo-5 {
+    top: 28%;
+    left: 22%;
+    width: 40%;
+    height: 40%;
+  }
+
+  .diary-more {
+    min-width: 62px;
+    min-height: 62px;
+  }
+
+  .modal-card {
+    padding: 18px;
   }
 }

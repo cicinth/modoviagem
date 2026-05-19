@@ -6,26 +6,30 @@ A primeira versao do produto deve focar no essencial para planejar e acompanhar 
 
 Funcionalidades principais do MVP:
 
+- Autenticacao com login e logout
 - CRUD de uma nova viagem
 - Visualizar viagens proximas
 - Visualizar viagens finalizadas
 - Marcar uma viagem como finalizada
 - Adicionar imagens por link ou colando a imagem para formar um moodboard da viagem
 - CRUD de roteiro com suporte a colar roteiro Markdown
+- Adicionar um diario visual da viagem por cidade ou pais, com notas e fotos em formato de colagem
 - Visualizar uma pagina organizada para cada viagem
 
 ## Fluxo principal do usuario
 
-1. A pessoa entra na home
-2. Visualiza viagens separadas entre proximas e finalizadas
-3. Cria uma nova viagem
-4. Preenche os dados principais
-5. Adiciona links de imagens
-6. Registra documentos, tarefas, seguro, passagens, hospedagem e deslocamentos
-7. Adiciona o roteiro com suporte a Markdown
-8. Consulta a pagina da viagem durante o planejamento
-9. Edita informacoes sempre que precisar
-10. Marca a viagem como finalizada depois que ela termina
+1. A pessoa entra na tela de login
+2. A pessoa acessa sua conta com e-mail e senha
+3. Visualiza viagens separadas entre proximas e finalizadas
+4. Cria uma nova viagem
+5. Preenche os dados principais
+6. Adiciona links de imagens
+7. Registra documentos, tarefas, seguro, passagens, hospedagem e deslocamentos
+8. Adiciona o roteiro com suporte a Markdown
+9. Adiciona memorias visuais e notas por cidade ou pais
+10. Consulta a pagina da viagem durante o planejamento
+11. Edita informacoes sempre que precisar
+12. Marca a viagem como finalizada depois que ela termina
 
 ## Analise de requisitos do MVP
 
@@ -36,6 +40,16 @@ Funcionalidades principais do MVP:
 - O sistema deve permitir alternar entre as categorias.
 - O sistema deve exibir informacoes resumidas de cada viagem.
 - O sistema deve permitir abrir a pagina de detalhes de uma viagem.
+
+### Autenticacao
+
+- O sistema deve permitir criar uma conta com nome, e-mail e senha.
+- O sistema deve permitir fazer login com e-mail e senha.
+- O sistema deve manter a sessao ativa ao recarregar a pagina.
+- O sistema deve permitir fazer logout.
+- O sistema deve associar cada viagem ao usuario logado.
+- O sistema deve impedir que um usuario acesse viagens de outro usuario.
+- O sistema deve redirecionar pessoas nao autenticadas para a tela de login.
 
 ### Criacao de viagem
 
@@ -99,6 +113,15 @@ Funcionalidades principais do MVP:
 - O roteiro pode estar em um formato Markdown.
 - O sistema deve exibir uma area visual de roteiro no estilo caderno/moodboard.
 
+### Diario da viagem
+
+- O sistema deve permitir adicionar memorias por cidade ou pais.
+- Cada memoria deve permitir registrar uma nota curta.
+- Cada memoria deve permitir registrar fotos por link ou colagem.
+- A pagina deve exibir as fotos em formato de colagem com limite de visualizacao resumida.
+- Quando houver mais fotos do que o limite resumido, o sistema deve permitir abrir a memoria para ver todas as fotos.
+- O diario deve funcionar como uma area propria da viagem e nao como parte do texto do roteiro.
+
 ## Requisitos nao funcionais
 
 ### Experiencia visual
@@ -114,6 +137,7 @@ Funcionalidades principais do MVP:
 - A navegacao entre home, nova viagem, pagina da viagem e roteiro deve ser simples.
 - Os campos devem ser organizados por secoes claras.
 - O produto deve evitar excesso de complexidade na primeira versao.
+- O login deve ser rapido de entender e nao exigir configuracao extra na entrada.
 
 ## Regras de negocio
 
@@ -123,10 +147,13 @@ Funcionalidades principais do MVP:
 - Imagens devem ser adicionadas por link ou colando.
 - O sistema nao deve fazer upload de imagens no MVP.
 - O roteiro pode ser colado em formato Markdown.
+- O diario visual deve usar fotos por link ou colagem, sem upload no MVP.
+- O diario visual deve ficar separado do roteiro em Markdown.
+- O acesso ao produto deve ser feito por conta autenticada no MVP.
 - A lista padrao de mala pode ser usada como ponto de partida.
 - A pessoa usuaria pode optar por criar uma lista de mala do zero.
 - O numero do bilhete do seguro so e necessario quando a viagem tiver seguro viagem.
 
 ## Documentos relacionados
 
-- [ModoViagem](./modoviagem.md)
+- [Viajário](./viajario.md)

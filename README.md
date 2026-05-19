@@ -1,4 +1,4 @@
-# ModoViagem
+# Viajário
 
 Projeto inicial do planejador de viagens em dois apps separados:
 
@@ -7,13 +7,18 @@ Projeto inicial do planejador de viagens em dois apps separados:
 
 ## Como rodar
 
-Em um terminal:
+### Backend
+
+O backend usa PostgreSQL com Prisma. Em um terminal:
 
 ```bash
 cd back
 npm install
+npm run docker:up
 npm run dev
 ```
+
+### Frontend
 
 Em outro terminal:
 
@@ -27,4 +32,4 @@ O frontend consome a API em `http://localhost:3333/api`.
 
 ## Persistência do MVP
 
-As viagens são salvas em `back/data/trips.txt` como JSON dentro de arquivo TXT. A lógica fica isolada em `back/src/storage/tripRepository.js` para facilitar trocar por banco de dados depois.
+As viagens agora sao salvas em PostgreSQL via Prisma. A modelagem e a arquitetura tecnica estao documentadas em `documentacoes/doc-tecnica-backend/`.

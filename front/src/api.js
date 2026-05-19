@@ -1,12 +1,14 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333/api";
 
 async function request(path, options = {}) {
+  const { token, headers = {}, ...rest } = options;
   const response = await fetch(`${API_URL}${path}`, {
     headers: {
       "Content-Type": "application/json",
-      ...options.headers
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...headers
     },
-    ...options
+    ...rest
   });
 
   if (!response.ok) {
@@ -21,10 +23,23 @@ async function request(path, options = {}) {
   return response.json();
 }
 
+export const authApi = {
+  register: (payload) => request("/auth/register", { method: "POST", body: JSON.stringify(payload) }),
+  login: (payload) => request("/auth/login", { method: "POST", body: JSON.stringify(payload) }),
+  me: (token) => request("/auth/me", { token })
+};
+
 export const tripsApi = {
-  list: () => request("/trips"),
-  create: (trip) => request("/trips", { method: "POST", body: JSON.stringify(trip) }),
-  update: (id, trip) => request(`/trips/${id}`, { method: "PUT", body: JSON.stringify(trip) }),
-  finalize: (id) => request(`/trips/${id}/finalize`, { method: "PATCH" }),
-  remove: (id) => request(`/trips/${id}`, { method: "DELETE" })
+  list: (token) => request("/trips", { token }),
+  get: (id, token) => request(`/trips/${id}`, { token }),
+  create: (trip, token) => request("/trips", { method: "POST", body: JSON.stringify(trip), token }),
+  update: (id, trip, token) => request(`/trips/${id}`, { method: "PUT", body: JSON.stringify(trip), token }),
+  finalize: (id, token) => request(`/trips/${id}/finalize`, { method: "PATCH", token }),
+  remove: (id, token) => request(`/trips/${id}`, { method: "DELETE", token }),
+  diaryList: (tripId, token) => request(`/trips/${tripId}/diary`, { token }),
+  diaryCreate: (tripId, entry, token) =>
+    request(`/trips/${tripId}/diary`, { method: "POST", body: JSON.stringify(entry), token }),
+  diaryUpdate: (tripId, entryId, entry, token) =>
+    request(`/trips/${tripId}/diary/${entryId}`, { method: "PUT", body: JSON.stringify(entry), token }),
+  diaryRemove: (tripId, entryId, token) => request(`/trips/${tripId}/diary/${entryId}`, { method: "DELETE", token })
 };
