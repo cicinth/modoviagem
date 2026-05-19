@@ -1,0 +1,58 @@
+[
+  {
+    "id": "2183df34-f43d-46db-8620-7a0a30bdb0d4",
+    "name": "China e Alemanha 2026",
+    "destination": "China e Alemanha",
+    "period": "03/11/2026 a 24/11/2026",
+    "status": "proxima",
+    "imageLinks": [
+      "https://i.pinimg.com/736x/83/3d/6a/833d6ac43d034400f1f0fb1e10f38dec.jpg",
+      "https://i.pinimg.com/736x/da/9b/ff/da9bffdd126e456290a579eef6c50f9c.jpg",
+      "https://i.pinimg.com/736x/93/18/53/931853b715529f8beeb992919e73891d.jpg",
+      "https://i.pinimg.com/736x/9b/db/01/9bdb018799d8cdbe884d5f4be9981357.jpg"
+    ],
+    "documents": [],
+    "tasks": [
+      {
+        "text": "comprar passagens",
+        "done": false
+      }
+    ],
+    "packingList": [
+      {
+        "text": "Passaporte ou documento",
+        "done": false
+      },
+      {
+        "text": "Carregador",
+        "done": false
+      },
+      {
+        "text": "Seguro viagem",
+        "done": false
+      },
+      {
+        "text": "Remédios pessoais",
+        "done": false
+      },
+      {
+        "text": "Roupas confortáveis",
+        "done": false
+      }
+    ],
+    "hasInsurance": true,
+    "insuranceTicket": "",
+    "transport": "",
+    "reservationCode": "",
+    "locator": "",
+    "accommodation": "",
+    "accommodationDates": "",
+    "accommodationLink": "",
+    "accommodationAddress": "",
+    "accommodationDirections": "",
+    "internalTransport": "",
+    "itineraryMarkdown": "# ✈️ China & Alemanha — Novembro 2026\n## 📅 2 de novembro → 24 de novembro\n\n---\n\n# 🌍 Overview\n\n## ✨ Objetivo da viagem\n- Cultura medieval alemã\n- Arquitetura gótica\n- Experiência bávara\n- China futurista\n- Pandas 🐼\n- Montanhas do Avatar 🌄\n- Cyberpunk em Chongqing 🌃\n- Gastronomia local\n\n---\n\n# 📌 Resumo da rota\n\n## 🇩🇪 Alemanha\n- Frankfurt\n- Heidelberg\n- Colônia\n- Munique\n\n## 🇨🇳 China\n- Pequim\n- Xi’an\n- Chengdu\n- Chongqing\n- Zhangjiajie\n- Shanghai\n\n---\n\n# 🌡️ Clima esperado\n\n| Cidade | Temperatura |\n|---|---|\n| Frankfurt | 5–12°C |\n| Heidelberg | 4–11°C |\n| Colônia | 6–12°C |\n| Munique | 3–10°C |\n| Pequim | 3–14°C |\n| Xi’an | 6–16°C |\n| Chengdu | 10–18°C |\n| Chongqing | 12–20°C |\n| Zhangjiajie | 8–16°C |\n| Shanghai | 10–18°C |\n\n---\n\n# 🇩🇪 ALEMANHA\n\n# 📍 2 Novembro\n## ✈️ São Paulo → Frankfurt\n\n- Voo internacional\n- Descanso\n\n---\n\n# 📍 3 Novembro\n# 🇩🇪 Frankfurt\n\n## ✨ Lugares\n- Römerberg\n- Centro histórico\n- Rio Main\n- Cafés alemães\n- Bares de Apfelwein\n\n## 🍽️ Comidas típicas\n- Schnitzel\n- Apfelwein\n- Bratwurst\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 4 Novembro\n# 🏰 Heidelberg (bate-volta)\n\n## 🚄 Trem\n~50 min de Frankfurt\n\n## ✨ Lugares\n- Castelo de Heidelberg\n- Ponte Antiga\n- Centro medieval\n- Mirantes\n\n## ☕ Atmosfera\n- Medieval\n- Gótica\n- Romântica\n\n## 🏨 Dormir\nFrankfurt\n\n---\n\n# 📍 5 Novembro\n# ⛪ Colônia (bate-volta)\n\n## 🚄 Trem\n~1h10 de Frankfurt\n\n## ✨ Lugares\n- Catedral de Colônia\n- Centro histórico\n- Rio Reno\n- Cervejarias tradicionais\n\n## 🍺 Comidas/Bebidas\n- Kölsch\n- Pretzel\n- Currywurst\n\n## 🏨 Dormir\nFrankfurt\n\n---\n\n# 📍 6 Novembro\n# 🍺 Munique\n\n## 🚄 Trem\n~3h–3h30\n\n## ✨ Lugares\n- Marienplatz\n- Hofbräuhaus\n- Biergartens\n- Igrejas bávaras\n- Centro histórico\n\n## 🍽️ Comidas típicas\n- Weisswurst\n- Pretzel\n- Joelho de porco\n- Cerveja bávara\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 7 Novembro\n# 🌳 Munique + retorno\n\n## ✨ Lugares\n- Englischer Garten\n- Palácio de Nymphenburg\n- Cafés\n- Compras\n\n## 🚄 Retorno\nMunique → Frankfurt\n\n## 🏨 Dormir\nFrankfurt (perto aeroporto)\n\n---\n\n# 📍 8 Novembro\n# ✈️ Frankfurt → Pequim\n\n---\n\n# 🇨🇳 CHINA\n\n# 📍 9–12 Novembro\n# 🏯 Pequim\n\n## ✨ Lugares\n- Grande Muralha\n- Cidade Proibida\n- Praça Tiananmen\n- Hutongs\n- Templo do Céu\n\n## 🍽️ Comidas típicas\n- Pato de Pequim\n- Dumplings\n- Noodles\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 13–14 Novembro\n# 🏺 Xi’an\n\n## 🚄 Trem-bala\nPequim → Xi’an\n\n## ✨ Lugares\n- Guerreiros de Terracota\n- Bairro Muçulmano\n- Street food\n- Muralha antiga\n\n## 🍽️ Comidas típicas\n- Biang Biang noodles\n- Roujiamo\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 15–17 Novembro\n# 🐼 Chengdu\n\n## ✨ Lugares\n- Panda Base\n- Casas de chá\n- Rua Jinli\n- Hotpot Sichuan\n\n## 🍽️ Experiências\n- Pandas\n- Cultura tradicional\n- Hotpot 🌶️\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 18–20 Novembro\n# 🌃 Chongqing\n\n## ✨ Lugares\n- Hongyadong\n- Liziba Station\n- Raffles City\n- Skyline cyberpunk\n- Shows de drones\n\n## 🍽️ Comidas típicas\n- Chongqing Hotpot\n- Noodles picantes\n- Skewers\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 21–22 Novembro\n# 🌄 Zhangjiajie\n\n## ✨ Lugares\n- Avatar Mountains\n- Tianmen Mountain\n- Heaven’s Gate\n- Ponte de vidro\n\n## 🌫️ Atmosfera\n- Cinematográfica\n- Surreal\n- Natureza\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 23 Novembro\n# 🏙️ Shanghai\n\n## ✨ Lugares\n- The Bund\n- Pudong\n- Shanghai Tower\n- Rooftops\n- Skyline futurista\n\n## 🍽️ Comidas típicas\n- Xiaolongbao\n- Street food\n- Noodles\n\n## 🏨 Hotel\n- [ ]\n\n---\n\n# 📍 24 Novembro\n# ✈️ Shanghai → São Paulo\n\n---\n\n# 💰 Budget\n\n| Categoria | Estimativa |\n|---|---|\n| Passagens internacionais | R$ 18k–25k |\n| Transporte interno | R$ 6k–10k |\n| Hotéis | R$ 8k–14k |\n| Alimentação | R$ 4k–6k |\n| Passeios | R$ 4k–8k |\n| Seguro + internet + VPN | R$ 1k–2k |\n\n# ✅ Total estimado\n## R$ 41k → 65k\n\n---\n\n# 📱 Apps importantes\n\n## Alemanha\n- DB Navigator\n- Google Maps\n\n## China\n- Alipay\n- WeChat\n- DiDi\n- Pleco\n- VPN\n\n---\n\n# 🍜 Food List\n\n## 🇩🇪 Alemanha\n- Schnitzel\n- Pretzel\n- Bratwurst\n- Weisswurst\n- Apfelwein\n- Kölsch\n\n## 🇨🇳 China\n- Pato de Pequim\n- Hotpot Sichuan\n- Chongqing Hotpot\n- Xiaolongbao\n- Dumplings\n- Biang Biang noodles",
+    "createdAt": "2026-05-18T20:22:02.220Z",
+    "updatedAt": "2026-05-18T22:47:32.732Z"
+  }
+]

@@ -10,18 +10,40 @@
     <style>
       :root {
         color-scheme: light;
-        --paper: #f3eadc;
-        --surface: #fffaf0;
-        --ink: #211d1c;
-        --muted: #6e625a;
-        --line: #211d1c;
-        --wine: #6f2432;
-        --kraft: #b58a63;
-        --sky: #9eb6c5;
-        --sage: #9aa083;
-        --butter: #e6c56a;
-        --rose-paper: #d9b5a9;
-        --shadow: 8px 8px 0 rgba(40, 33, 43, 0.14);
+        --paper: #f5efe6;
+        --surface: #fffcf7;
+        --ink: #2e2a27;
+        --muted: #6b625a;
+        --line: #2e2a27;
+        --passport: #1f3a5f;
+        --deep-green: #355c4d;
+        --aged-gold: #c9a25d;
+        --aged-border: #d7c6aa;
+        --secondary: #6f7d6d;
+        --terracotta: #b86b5e;
+        --memory-rose: #d9a6a0;
+        --cool-paper: #a9bbc2;
+        --rose-paper: #f0ddd8;
+        --color-bg: var(--paper);
+        --color-card: var(--surface);
+        --color-text: var(--ink);
+        --color-primary: var(--passport);
+        --color-success: var(--deep-green);
+        --color-accent: var(--aged-gold);
+        --color-affective: var(--memory-rose);
+        --color-stamp: var(--terracotta);
+        --color-border-soft: var(--aged-border);
+        --color-secondary: var(--secondary);
+        --space-1: 8px;
+        --space-2: 14px;
+        --space-3: 18px;
+        --space-4: 22px;
+        --space-5: 32px;
+        --radius-sm: 6px;
+        --radius-md: 8px;
+        --shadow-paper: 8px 8px 0 rgba(46, 42, 39, 0.14);
+        --shadow-lift: 4px 4px 0 rgba(46, 42, 39, 0.12);
+        --shadow: var(--shadow-paper);
       }
 
       * {
@@ -31,13 +53,13 @@
       body {
         margin: 0;
         background:
-          radial-gradient(circle at 12% 8%, rgba(230, 197, 106, 0.38), transparent 22%),
-          radial-gradient(circle at 90% 8%, rgba(158, 182, 197, 0.28), transparent 20%),
-          linear-gradient(90deg, rgba(40, 33, 43, 0.045) 1px, transparent 1px),
-          linear-gradient(0deg, rgba(40, 33, 43, 0.045) 1px, transparent 1px),
-          var(--paper);
+          radial-gradient(circle at 12% 8%, rgba(201, 162, 93, 0.34), transparent 22%),
+          radial-gradient(circle at 90% 8%, rgba(31, 58, 95, 0.16), transparent 20%),
+          linear-gradient(90deg, rgba(46, 42, 39, 0.045) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(46, 42, 39, 0.045) 1px, transparent 1px),
+          var(--color-bg);
         background-size: auto, auto, 28px 28px, 28px 28px, auto;
-        color: var(--ink);
+        color: var(--color-text);
         font-family: Inter, sans-serif;
       }
 
@@ -56,7 +78,7 @@
       }
 
       .eyebrow {
-        color: var(--wine);
+        color: var(--color-stamp);
         font-size: 0.78rem;
         font-weight: 900;
         text-transform: uppercase;
@@ -106,13 +128,13 @@
       .rule-card,
       .density-card {
         border: 2px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface);
+        border-radius: var(--radius-md);
+        background: var(--color-card);
         box-shadow: var(--shadow);
       }
 
       .panel {
-        padding: 22px;
+        padding: var(--space-4);
       }
 
       .grid {
@@ -130,12 +152,12 @@
       .theme,
       .rule-card,
       .density-card {
-        padding: 18px;
+        padding: var(--space-3);
       }
 
       .script {
         display: block;
-        color: var(--wine);
+        color: var(--color-stamp);
         font-family: Caveat, cursive;
         font-size: 2rem;
         line-height: 1;
@@ -151,17 +173,17 @@
       .swatch {
         min-height: 74px;
         border: 2px solid var(--line);
-        border-radius: 8px;
+        border-radius: var(--radius-md);
         background: var(--color);
       }
 
       .ratio-bar {
         display: grid;
-        grid-template-columns: 6fr 2fr 1fr 1fr;
+        grid-template-columns: 6fr 2fr repeat(5, minmax(86px, 1fr));
         overflow: hidden;
         margin-top: 16px;
         border: 2px solid var(--line);
-        border-radius: 8px;
+        border-radius: var(--radius-md);
         box-shadow: 5px 6px 0 rgba(40, 33, 43, 0.12);
       }
 
@@ -206,24 +228,43 @@
         align-items: center;
         padding: 0 16px;
         border: 2px solid var(--line);
-        border-radius: 8px;
+        border-radius: var(--radius-md);
         color: var(--ink);
         font-weight: 900;
         text-decoration: none;
-        box-shadow: 4px 4px 0 rgba(40, 33, 43, 0.12);
+        box-shadow: var(--shadow-lift);
+      }
+
+      .button:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 5px 5px 0 rgba(46, 42, 39, 0.16);
+      }
+
+      .button:focus-visible,
+      .input-demo:focus-visible {
+        outline: 3px solid var(--color-accent);
+        outline-offset: 3px;
       }
 
       .button.primary {
-        background: var(--wine);
+        background: var(--color-primary);
         color: var(--surface);
       }
 
       .button.secondary {
-        background: var(--butter);
+        background: var(--color-accent);
       }
 
       .button.tertiary {
         background: var(--surface);
+      }
+
+      .button.disabled {
+        background: var(--aged-border);
+        color: rgba(46, 42, 39, 0.58);
+        transform: none;
+        box-shadow: none;
+        cursor: not-allowed;
       }
 
       .status {
@@ -233,7 +274,7 @@
         padding: 0 10px;
         border: 2px solid var(--line);
         border-radius: 999px;
-        background: var(--sage);
+        background: var(--color-accent);
         color: var(--ink);
         font-size: 0.76rem;
         font-weight: 900;
@@ -241,7 +282,13 @@
       }
 
       .status.done {
-        background: var(--kraft);
+        background: var(--color-success);
+        color: var(--surface);
+      }
+
+      .status.alert {
+        background: var(--color-stamp);
+        color: var(--surface);
       }
 
       .field-demo {
@@ -305,7 +352,7 @@
         height: 24px;
         content: "";
         border: 1px solid rgba(40, 33, 43, 0.14);
-        background: rgba(230, 197, 106, 0.38);
+        background: rgba(201, 162, 93, 0.38);
         transform: rotate(-4deg);
       }
 
@@ -384,11 +431,11 @@
         border: 2px solid var(--line);
         border-radius: 8px;
         background:
-          radial-gradient(circle at 88% 12%, rgba(230, 197, 106, 0.45) 0 54px, transparent 55px),
-          radial-gradient(circle at 9% 80%, rgba(158, 182, 197, 0.42) 0 74px, transparent 75px),
+          radial-gradient(circle at 88% 12%, rgba(201, 162, 93, 0.42) 0 54px, transparent 55px),
+          radial-gradient(circle at 9% 80%, rgba(31, 58, 95, 0.18) 0 74px, transparent 75px),
           linear-gradient(90deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
           linear-gradient(0deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
-          #fffaf1;
+          var(--surface);
         background-size: 28px 28px;
         box-shadow: var(--shadow);
       }
@@ -419,7 +466,7 @@
         border: 2px solid rgba(33, 29, 28, 0.78);
         background:
           linear-gradient(90deg, rgba(255, 255, 255, 0.52) 0 9px, transparent 9px 24px),
-          #211d1c;
+          var(--passport);
         box-shadow: 8px 10px 0 rgba(33, 29, 28, 0.12);
         transform: rotate(-8deg);
       }
@@ -512,7 +559,7 @@
         place-items: center;
         padding: 8px 14px;
         border: 2px solid var(--line);
-        background: var(--butter);
+        background: var(--color-accent);
         color: var(--ink);
         font-family: Caveat, cursive;
         font-size: 1.35rem;
@@ -523,7 +570,7 @@
 
       .slip-1 { left: 92px; top: 208px; --rotate: -7deg; }
       .slip-2 { right: 292px; top: 310px; background: var(--rose-paper); --rotate: 5deg; }
-      .slip-3 { right: 178px; bottom: 144px; background: var(--sage); --rotate: -4deg; }
+      .slip-3 { right: 178px; bottom: 144px; background: var(--color-secondary); --rotate: -4deg; }
 
       .tape {
         position: absolute;
@@ -533,7 +580,7 @@
         border: 1px solid rgba(33, 29, 28, 0.18);
         background:
           linear-gradient(90deg, transparent 0 10px, rgba(255,255,255,.3) 10px 14px, transparent 14px),
-          rgba(230, 197, 106, 0.62);
+          rgba(201, 162, 93, 0.62);
         box-shadow: 2px 3px 0 rgba(33, 29, 28, 0.08);
         transform: rotate(var(--rotate));
       }
@@ -549,24 +596,24 @@
         place-items: center;
         width: var(--size);
         height: var(--size);
-        color: var(--sticker-color, var(--wine));
+        color: var(--sticker-color, var(--color-stamp));
         filter: drop-shadow(3px 4px 0 rgba(33, 29, 28, 0.16));
         font-family: "Arial Black", Impact, sans-serif;
         font-size: calc(var(--size) * 0.62);
         line-height: 1;
-        -webkit-text-stroke: 2px #fffaf0;
+        -webkit-text-stroke: 2px var(--surface);
         transform: rotate(var(--rotate));
       }
 
       .sticker.star::before { content: "★"; }
       .sticker.heart::before { content: "♥"; }
       .sticker.spark::before { content: "✦"; }
-      .sticker.s1 { --size: 42px; --rotate: -12deg; left: 64px; top: 86px; --sticker-color: var(--butter); }
-      .sticker.s2 { --size: 34px; --rotate: 10deg; left: 300px; top: 170px; --sticker-color: var(--wine); }
-      .sticker.s3 { --size: 46px; --rotate: 18deg; right: 42px; top: 214px; --sticker-color: var(--sage); }
-      .sticker.s4 { --size: 38px; --rotate: -18deg; right: 330px; bottom: 80px; --sticker-color: var(--sky); }
-      .sticker.s5 { --size: 30px; --rotate: 8deg; left: 374px; bottom: 270px; --sticker-color: var(--rose-paper); }
-      .sticker.s6 { --size: 34px; --rotate: -10deg; right: 92px; bottom: 38px; --sticker-color: var(--butter); }
+      .sticker.s1 { --size: 42px; --rotate: -12deg; left: 64px; top: 86px; --sticker-color: var(--color-accent); }
+      .sticker.s2 { --size: 34px; --rotate: 10deg; left: 300px; top: 170px; --sticker-color: var(--color-stamp); }
+      .sticker.s3 { --size: 46px; --rotate: 18deg; right: 42px; top: 214px; --sticker-color: var(--color-secondary); }
+      .sticker.s4 { --size: 38px; --rotate: -18deg; right: 330px; bottom: 80px; --sticker-color: var(--cool-paper); }
+      .sticker.s5 { --size: 30px; --rotate: 8deg; left: 374px; bottom: 270px; --sticker-color: var(--memory-rose); }
+      .sticker.s6 { --size: 34px; --rotate: -10deg; right: 92px; bottom: 38px; --sticker-color: var(--color-accent); }
 
       .scribble-arrow {
         position: absolute;
@@ -612,11 +659,16 @@
 
       .timeline-demo {
         position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        align-items: stretch;
         min-height: 330px;
         padding: 32px 24px;
+        overflow: hidden;
         border: 2px solid var(--line);
         border-radius: 8px;
-        background: #fffaf1;
+        background: var(--surface);
         box-shadow: var(--shadow);
       }
 
@@ -624,7 +676,8 @@
         position: absolute;
         left: 40px;
         right: 40px;
-        top: 160px;
+        top: 50%;
+        transform: translateY(-50%);
         border-top: 4px solid var(--line);
       }
 
@@ -638,13 +691,27 @@
       }
 
       .week-item {
-        position: absolute;
-        width: 150px;
+        position: relative;
+        z-index: 1;
+        width: min(100%, 150px);
+        min-width: 0;
+        justify-self: center;
       }
 
       .week-item strong {
         display: block;
         font-size: 1.6rem;
+      }
+
+      .week-item::before {
+        position: absolute;
+        left: 16px;
+        width: 18px;
+        height: 18px;
+        border: 4px solid var(--line);
+        border-radius: 50%;
+        background: var(--color-accent);
+        content: "";
       }
 
       .week-item img {
@@ -655,10 +722,25 @@
         box-shadow: 5px 5px 0 rgba(40, 33, 43, 0.12);
       }
 
-      .w1 { left: 34px; top: 42px; }
-      .w2 { left: 230px; top: 180px; }
-      .w3 { left: 430px; top: 38px; }
-      .w4 { right: 54px; top: 172px; }
+      .w1,
+      .w3 {
+        align-self: start;
+      }
+
+      .w1::before,
+      .w3::before {
+        bottom: -47px;
+      }
+
+      .w2,
+      .w4 {
+        align-self: end;
+      }
+
+      .w2::before,
+      .w4::before {
+        top: -47px;
+      }
 
       .pattern-list {
         display: grid;
@@ -678,7 +760,7 @@
         background:
           linear-gradient(90deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
           linear-gradient(0deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
-          #fffaf1;
+          var(--surface);
         background-size: 24px 24px;
       }
 
@@ -702,9 +784,11 @@
         border: 2px solid var(--line);
         border-radius: 8px;
         background:
+          radial-gradient(circle at 86% 18%, rgba(255, 93, 143, 0.16), transparent 18%),
+          radial-gradient(circle at 12% 80%, rgba(0, 163, 173, 0.16), transparent 20%),
           linear-gradient(90deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
           linear-gradient(0deg, rgba(40, 33, 43, 0.08) 1px, transparent 1px),
-          #fffaf1;
+          var(--surface);
         background-size: 26px 26px;
         box-shadow: var(--shadow);
       }
@@ -725,63 +809,107 @@
         border: var(--letter-border, 2px solid rgba(33, 29, 28, 0.65));
         border-radius: var(--letter-radius, 12px 9px 14px 8px);
         background: var(--paper-color);
-        color: var(--letter-color, var(--wine));
+        color: var(--letter-color, var(--color-primary));
         font-family: var(--letter-font, "Playfair Display", Georgia, serif);
         font-size: var(--letter-size, 2.8rem);
         font-weight: var(--letter-weight, 900);
+        font-style: var(--letter-style, normal);
         line-height: 1;
         text-transform: var(--letter-transform, uppercase);
         text-shadow: var(--letter-shadow, none);
-        box-shadow: 5px 6px 0 rgba(40, 33, 43, 0.12), inset var(--letter-inset, 0 0 0 transparent);
+        box-shadow:
+          5px 6px 0 rgba(40, 33, 43, 0.12),
+          inset var(--letter-inset, 0 0 0 transparent);
         transform: rotate(var(--rotate));
       }
 
-      .letter:nth-child(6n + 1) {
-        --paper-color: #153447;
-        --letter-color: #f7df9a;
+      .letter:nth-child(10n + 1) {
+        --paper-color: var(--passport);
+        --letter-color: #f4df9a;
         --rotate: -7deg;
         --letter-font: Georgia, serif;
-        --letter-shadow: 1px 1px 0 #211d1c;
+        --letter-shadow: 1px 1px 0 var(--ink);
         --letter-radius: 0;
       }
-      .letter:nth-child(6n + 2) {
-        --paper-color: #e6c56a;
-        --letter-color: #284e60;
-        --rotate: 3deg;
-        --letter-font: "Playfair Display", Georgia, serif;
-        --letter-border: 3px dashed #284e60;
+
+      .letter:nth-child(10n + 2) {
+        --paper-color: #ffcf3f;
+        --letter-color: #173f7a;
+        --rotate: 5deg;
+        --letter-font: "Arial Black", Impact, sans-serif;
+        --letter-border: 3px dashed #173f7a;
       }
-      .letter:nth-child(6n + 3) {
-        --paper-color: #ef7d32;
-        --letter-color: #e7f0e2;
-        --rotate: -2deg;
+
+      .letter:nth-child(10n + 3) {
+        --paper-color: #ff5d8f;
+        --letter-color: #fff7fb;
+        --rotate: -4deg;
         --letter-font: Impact, "Arial Black", sans-serif;
-        --letter-shadow: 2px 2px 0 #6f2432;
+        --letter-shadow: 2px 2px 0 #7d1638;
         --letter-radius: 2px;
       }
-      .letter:nth-child(6n + 4) {
-        --paper-color: linear-gradient(135deg, #c9d0d2, #f7f7f2 45%, #8d9699);
-        --letter-color: #56646a;
-        --rotate: 6deg;
+
+      .letter:nth-child(10n + 4) {
+        --paper-color: linear-gradient(135deg, #00a3ad, #c8fbff 48%, #0a5b66);
+        --letter-color: #102629;
+        --rotate: 7deg;
         --letter-font: "Arial Black", Impact, sans-serif;
         --letter-inset: 0 0 18px rgba(255,255,255,.8);
         --letter-radius: 20px;
       }
-      .letter:nth-child(6n + 5) {
-        --paper-color: #f6d05d;
-        --letter-color: #d9587a;
-        --rotate: -4deg;
+
+      .letter:nth-child(10n + 5) {
+        --paper-color: #f47b20;
+        --letter-color: #2e1a0f;
+        --rotate: -8deg;
         --letter-font: Georgia, serif;
-        --letter-border: 2px solid #d9587a;
-        --letter-shadow: 1px 1px 0 #fffaf0;
+        --letter-border: 2px solid #2e1a0f;
+        --letter-shadow: 1px 1px 0 #ffd0a6;
       }
-      .letter:nth-child(6n) {
-        --paper-color: #fffaf0;
-        --letter-color: #211d1c;
+
+      .letter:nth-child(10n + 6) {
+        --paper-color: #fff7f0;
+        --letter-color: #d81b60;
         --rotate: 5deg;
         --letter-font: "Trebuchet MS", sans-serif;
-        --letter-border: 4px solid #6f2432;
+        --letter-border: 4px solid #d81b60;
         --letter-radius: 50%;
+      }
+
+      .letter:nth-child(10n + 7) {
+        --paper-color: #111111;
+        --letter-color: #ffffff;
+        --rotate: -3deg;
+        --letter-font: "Playfair Display", Georgia, serif;
+        --letter-size: 3.2rem;
+        --letter-transform: lowercase;
+      }
+
+      .letter:nth-child(10n + 8) {
+        --paper-color: #7a5cff;
+        --letter-color: #f8f3ff;
+        --rotate: 8deg;
+        --letter-font: Impact, "Arial Black", sans-serif;
+        --letter-border: 2px solid #321d8a;
+        --letter-shadow: 2px 2px 0 #321d8a;
+      }
+
+      .letter:nth-child(10n + 9) {
+        --paper-color: linear-gradient(90deg, #ffffff 0 18px, #d9e6ff 18px 21px);
+        --letter-color: #0b4f8a;
+        --rotate: -6deg;
+        --letter-font: "Courier New", monospace;
+        --letter-border: 2px solid #0b4f8a;
+        --letter-size: 2.5rem;
+      }
+
+      .letter:nth-child(10n) {
+        --paper-color: #b8ec73;
+        --letter-color: #24330f;
+        --rotate: 4deg;
+        --letter-font: Georgia, serif;
+        --letter-style: italic;
+        --letter-border: 3px solid #24330f;
       }
 
       .collage-caption {
@@ -799,7 +927,7 @@
         padding: 8px 14px;
         border: 2px solid var(--line);
         border-radius: 6px;
-        background: var(--wine);
+        background: var(--color-primary);
         color: var(--surface);
         font-size: 1.1rem;
         font-weight: 900;
@@ -849,8 +977,20 @@
         margin-top: 16px;
       }
 
+      .spec-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .spec-list .card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--ink);
+      }
+
       .do {
-        background: color-mix(in srgb, var(--sage) 42%, var(--surface));
+        background: color-mix(in srgb, var(--color-secondary) 42%, var(--surface));
       }
 
       .dont {
@@ -866,7 +1006,8 @@
         .pattern-list,
         .screen-rules,
         .density-list,
-        .component-grid {
+        .component-grid,
+        .spec-list {
           grid-template-columns: 1fr;
         }
 
@@ -1014,7 +1155,10 @@
         .doodle.line { left: 54px; top: 1000px; }
 
         .timeline-demo {
-          min-height: 660px;
+          grid-template-columns: 1fr;
+          gap: 26px;
+          min-height: auto;
+          padding: 32px 18px 34px 70px;
         }
 
         .timeline-line {
@@ -1036,8 +1180,17 @@
         }
 
         .week-item {
-          left: 64px;
-          width: calc(100% - 84px);
+          width: 100%;
+          max-width: 220px;
+          justify-self: start;
+        }
+
+        .week-item::before {
+          top: 14px;
+          bottom: auto;
+          left: -46px;
+          width: 16px;
+          height: 16px;
         }
 
         .week-item strong {
@@ -1055,10 +1208,12 @@
           height: 88px;
         }
 
-        .w1 { top: 44px; }
-        .w2 { top: 188px; }
-        .w3 { top: 332px; }
-        .w4 { top: 476px; right: auto; }
+        .w1,
+        .w2,
+        .w3,
+        .w4 {
+          align-self: start;
+        }
 
         .letter {
           min-width: 44px;
@@ -1075,13 +1230,13 @@
           <span class="eyebrow">Design system</span>
           <h1>Planejador de Viagens</h1>
           <p>
-            Guia visual e de produto para manter a experiência consistente: um caderno de viagens digital,
-            leve, organizado e com energia de moodboard.
+            Guia visual e de produto para criar um diário pessoal de viagem: organizado para planejar,
+            afetivo para guardar memórias e bonito o suficiente para dar vontade de voltar.
           </p>
         </div>
         <aside class="panel">
           <span class="script">personalidade</span>
-          <p>Organizado, afetivo, visual, exploratório e simples de consultar.</p>
+          <p>Íntimo, organizado, visual, nostálgico e simples de consultar.</p>
         </aside>
       </header>
 
@@ -1101,18 +1256,22 @@
             <h3>🎒 Caderno vivo</h3>
             <p>A interface deve parecer um espaço de planejamento em construção: editável, pessoal e acolhedor.</p>
           </article>
+          <article class="card">
+            <h3>💌 Apego emocional</h3>
+            <p>Cada viagem deve parecer uma memória em formação, não apenas uma lista de tarefas para resolver.</p>
+          </article>
         </div>
       </section>
 
       <section class="panel">
         <span class="eyebrow">Referências visuais</span>
-        <h2>Collage Travel Journal</h2>
+        <h2>Diário De Viagem Em Colagem</h2>
         <p>
           A nova direção visual combina diário de viagem, colagem editorial e interface de caderno.
-          As referências mostram páginas com fotos recortadas, grid de papel, anotações manuscritas,
-          timeline semanal, stickers, setas, clipes, fitas e pequenos objetos visuais.
+          As referências mostram páginas com fotos recortadas, grade de papel, anotações manuscritas,
+          linha do tempo semanal, adesivos, setas, clipes, fitas e pequenos objetos visuais.
         </p>
-        <div class="reference-board" aria-label="Exemplo de direção visual collage travel journal">
+        <div class="reference-board" aria-label="Exemplo de direção visual de diário de viagem em colagem">
           <div class="spiral"></div>
           <span class="sticker star s1"></span>
           <span class="sticker heart s2"></span>
@@ -1123,35 +1282,35 @@
           <span class="tape tape-1"></span>
           <span class="tape tape-2"></span>
           <span class="tape tape-3"></span>
-          <span class="collage-slip slip-1">new place</span>
-          <span class="collage-slip slip-2">tiny memory</span>
-          <span class="collage-slip slip-3">save this</span>
+          <span class="collage-slip slip-1">novo lugar</span>
+          <span class="collage-slip slip-2">memória pequena</span>
+          <span class="collage-slip slip-3">guardar isso</span>
           <span class="scribble-arrow a1">↝</span>
           <span class="scribble-arrow a2">↗</span>
           <span class="scribble-arrow a3">↘</span>
           <div class="journal-title">
-            <strong>Travel<br />diaries</strong>
-            <p>Every trip becomes a page: notes, photos, tickets, tiny memories and a route to follow.</p>
+            <strong>Diário<br />de bordo</strong>
+            <p>Cada viagem vira uma página: notas, fotos, tickets, pequenas lembranças e um caminho para seguir.</p>
           </div>
           <img class="cutout person" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=520&q=84" alt="" />
           <figure class="polaroid p1">
             <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=720&q=84" alt="" />
-            <figcaption>paris night</figcaption>
+            <figcaption>noite em paris</figcaption>
           </figure>
           <figure class="polaroid p2">
             <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=720&q=84" alt="" />
-            <figcaption>breakfast</figcaption>
+            <figcaption>café da manhã</figcaption>
           </figure>
           <figure class="polaroid p3">
             <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=560&q=84" alt="" />
-            <figcaption>look</figcaption>
+            <figcaption>visual</figcaption>
           </figure>
           <figure class="polaroid p4">
             <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=560&q=84" alt="" />
-            <figcaption>city</figcaption>
+            <figcaption>cidade</figcaption>
           </figure>
-          <div class="paper-note note-1">just had breakfast near the tower — felt like a dream.</div>
-          <div class="paper-note note-2">day 01<br />check-in<br />museum</div>
+          <div class="paper-note note-1">café perto da torre — parecia cena de filme.</div>
+          <div class="paper-note note-2">dia 01<br />entrada<br />museu</div>
           <div class="doodle star">✦ ✦</div>
           <div class="doodle arrow">↘</div>
           <div class="doodle line">- - - - - -</div>
@@ -1164,14 +1323,14 @@
         <div class="grid">
           <article class="card">
             <h3>🏠 Home = mural</h3>
-            <p>A home pode ser mais livre: fotos sobrepostas, stickers, cards inclinados, rabiscos e chamadas editoriais.</p>
+            <p>A tela inicial pode ser mais livre: fotos sobrepostas, adesivos, cartões inclinados, rabiscos e chamadas editoriais.</p>
           </article>
           <article class="card">
             <h3>📖 Página da viagem = caderno organizado</h3>
             <p>Deve ter visual de papel e colagem, mas com seções claras para documentos, mala, hospedagem e passagens.</p>
           </article>
           <article class="card">
-            <h3>🗺️ Roteiro = diário/timeline</h3>
+            <h3>🗺️ Roteiro = diário/linha do tempo</h3>
             <p>Cidades e dias podem parecer páginas de diário, com linha do tempo, setas, etiquetas e listas manuscritas.</p>
           </article>
         </div>
@@ -1181,35 +1340,47 @@
         <span class="eyebrow">02</span>
         <h2>Paleta Oficial</h2>
         <p>
-          A paleta oficial deve parecer um caderno de colagens real: papel quente, tinta preta,
-          vinho de etiqueta, kraft amassado, céu acinzentado, verde gasto e dourado queimado.
-          A ideia é reduzir a sensação de interface colorida e aumentar a sensação de diário/manual.
+          A paleta oficial parte da ideia de passaporte brasileiro sem copiar o documento:
+          azul profundo, verde elegante, dourado envelhecido, terracota rosado, papel quente e tinta escura.
+          A interface deve parecer um arquivo pessoal de viagem, com sensação premium, editorial e afetiva.
+          O objetivo emocional é fazer a pessoa sentir que está montando algo dela, não preenchendo um sistema.
         </p>
         <div class="swatches">
-          <span class="swatch" style="--color:#f3eadc"></span>
-          <span class="swatch" style="--color:#fffaf0"></span>
-          <span class="swatch" style="--color:#211d1c"></span>
-          <span class="swatch" style="--color:#6f2432"></span>
-          <span class="swatch" style="--color:#b58a63"></span>
-          <span class="swatch" style="--color:#9eb6c5"></span>
-          <span class="swatch" style="--color:#9aa083"></span>
-          <span class="swatch" style="--color:#e6c56a"></span>
+          <span class="swatch" style="--color:#f5efe6"></span>
+          <span class="swatch" style="--color:#fffcf7"></span>
+          <span class="swatch" style="--color:#2e2a27"></span>
+          <span class="swatch" style="--color:#1f3a5f"></span>
+          <span class="swatch" style="--color:#355c4d"></span>
+          <span class="swatch" style="--color:#c9a25d"></span>
+          <span class="swatch" style="--color:#b86b5e"></span>
+          <span class="swatch" style="--color:#d9a6a0"></span>
+          <span class="swatch" style="--color:#d7c6aa"></span>
+          <span class="swatch" style="--color:#6f7d6d"></span>
         </div>
         <p>
-          Tokens: <code>paper</code> #F3EADC, <code>surface</code> #FFFAF0,
-          <code>ink</code> #211D1C, <code>wine</code> #6F2432,
-          <code>kraft</code> #B58A63, <code>sky</code> #9EB6C5,
-          <code>sage</code> #9AA083, <code>butter</code> #E6C56A.
+          Tokens: <code>paper</code> #F5EFE6, <code>surface</code> #FFFCF7,
+          <code>ink</code> #2E2A27, <code>passport</code> #1F3A5F,
+          <code>deep-green</code> #355C4D, <code>aged-gold</code> #C9A25D,
+          <code>terracotta</code> #B86B5E, <code>memory-rose</code> #D9A6A0,
+          <code>aged-border</code> #D7C6AA, <code>secondary</code> #6F7D6D.
+        </p>
+        <p>
+          Tokens semânticos de implementação: <code>color-primary</code>, <code>color-success</code>,
+          <code>color-accent</code>, <code>color-affective</code>, <code>color-stamp</code>,
+          <code>color-card</code> e <code>color-bg</code>.
         </p>
         <div class="ratio-bar" aria-label="Proporção recomendada de uso da paleta">
-          <span style="--color:#fffaf0">60% papel</span>
-          <span style="--color:#211d1c;--label-color:#fffaf0">20% tinta</span>
-          <span style="--color:#b58a63">10% apoio</span>
-          <span style="--color:#6f2432;--label-color:#fffaf0">10% destaque</span>
+          <span style="--color:#fffcf7">60% papel</span>
+          <span style="--color:#2e2a27;--label-color:#fffcf7">18% tinta</span>
+          <span style="--color:#1f3a5f;--label-color:#fffcf7">8% principal</span>
+          <span style="--color:#c9a25d">6% selo</span>
+          <span style="--color:#b86b5e">5% carimbo</span>
+          <span style="--color:#d9a6a0">2% memória</span>
+          <span style="--color:#355c4d;--label-color:#fffcf7">1% pronto</span>
         </div>
         <p>
-          Regra prática: a interface deve parecer primeiro uma página de caderno; cores fortes aparecem como
-          etiquetas, carimbos, destaques e pequenos pontos de orientação.
+          Regra prática: a interface deve parecer primeiro um objeto pessoal; cores fortes aparecem como
+          ações principais, carimbos, selos de imigração e pontos de orientação.
         </p>
       </section>
 
@@ -1219,27 +1390,70 @@
         <div class="grid">
           <article class="theme">
             <h3>📄 Base de papel</h3>
-            <p><code>#F3EADC</code> e <code>#FFFAF0</code> são usados como fundo, páginas, cards e áreas de leitura.</p>
+            <p><code>#F5EFE6</code> e <code>#FFFCF7</code> são usados como fundo, páginas, cartões e áreas de leitura.</p>
           </article>
           <article class="theme">
             <h3>🖋️ Tinta e escrita</h3>
-            <p><code>#211D1C</code> é a cor de texto, bordas, rabiscos, setas, doodles e estrutura visual.</p>
+            <p><code>#2E2A27</code> é a cor de texto, bordas, rabiscos, setas, doodles e estrutura visual.</p>
           </article>
           <article class="theme">
-            <h3>🏷️ Etiquetas e status</h3>
-            <p><code>#6F2432</code> deve aparecer em títulos pequenos, carimbos, status e chamadas importantes.</p>
+            <h3>🛂 Azul passaporte</h3>
+            <p><code>#1F3A5F</code> deve aparecer em ações principais, navegação, capas, títulos pequenos e carimbos fortes.</p>
           </article>
           <article class="theme">
-            <h3>📦 Papel kraft</h3>
-            <p><code>#B58A63</code> funciona para papéis rasgados, tickets, notas e blocos de reserva.</p>
+            <h3>🌿 Verde profundo</h3>
+            <p><code>#355C4D</code> fica restrito a sucesso, status confirmados, documentos concluídos e checklists prontos.</p>
           </article>
           <article class="theme">
-            <h3>🌫️ Céu frio</h3>
-            <p><code>#9EB6C5</code> traz o clima de foto analógica, dias nublados, cidade e viagem urbana.</p>
+            <h3>🏅 Dourado envelhecido</h3>
+            <p><code>#C9A25D</code> entra como selo, destaque, fita, etiqueta especial e detalhe premium.</p>
           </article>
           <article class="theme">
-            <h3>🌿 Verde gasto</h3>
-            <p><code>#9AA083</code> é usado em detalhes calmos, checklists, mapas e informações secundárias.</p>
+            <h3>🏷️ Terracota rosado</h3>
+            <p><code>#B86B5E</code> aquece carimbos fortes, alertas leves, adesivos, etiquetas pessoais e notas editoriais.</p>
+          </article>
+          <article class="theme">
+            <h3>🌸 Rosa memória</h3>
+            <p><code>#D9A6A0</code> entra em notas pessoais, fundos suaves de lembranças, etiquetas afetivas e detalhes de legenda.</p>
+          </article>
+          <article class="theme">
+            <h3>🧾 Bordas envelhecidas</h3>
+            <p><code>#D7C6AA</code> e <code>#6F7D6D</code> sustentam papéis, tickets, estados secundários e contraste sutil.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <span class="eyebrow">Análise cromática</span>
+        <h2>Como A Paleta Deve Fazer Sentir</h2>
+        <div class="spec-list">
+          <article class="card">
+            <strong>Azul passaporte cria confiança.</strong>
+            <p>Use em ações principais, navegação e elementos de estrutura. Ele segura a experiência para que o diário não pareça infantil.</p>
+          </article>
+          <article class="card">
+            <strong>Terracota rosado cria afeto.</strong>
+            <p>Use em carimbos fortes, comentários e detalhes humanos. Ele aproxima o produto da memória pessoal sem perder presença.</p>
+          </article>
+          <article class="card">
+            <strong>Rosa memória cria delicadeza.</strong>
+            <p>Use como camada suave em notas pessoais, etiquetas afetivas e áreas de lembrança. Ele reduz a dureza do azul, verde e dourado.</p>
+          </article>
+          <article class="card">
+            <strong>Dourado envelhecido cria recompensa.</strong>
+            <p>Use como selo, destaque e momento de conquista. Não deve virar cor de fundo dominante para não perder o aspecto premium.</p>
+          </article>
+          <article class="card">
+            <strong>Verde profundo cria resolução.</strong>
+            <p>Use pouco: estados confirmados, checklist concluído, documentos prontos e sensação de segurança antes da viagem.</p>
+          </article>
+          <article class="card">
+            <strong>Papel quente cria permanência.</strong>
+            <p>Fundo e cartões precisam parecer guardáveis, como uma página de diário. Isso aumenta o apego emocional sem atrapalhar a leitura.</p>
+          </article>
+          <article class="card">
+            <strong>Cores livres ficam na colagem.</strong>
+            <p>Rosa vivo, roxo, turquesa e laranja aparecem em letras recortadas e painéis visuais. Fora disso, a paleta principal deve controlar a interface.</p>
           </article>
         </div>
       </section>
@@ -1270,9 +1484,10 @@
           <article class="component">
             <h3>Botões</h3>
             <div class="button-row">
-              <span class="button primary">Ação principal</span>
-              <span class="button secondary">Ação secundária</span>
+              <span class="button primary">Confirmar embarque</span>
+              <span class="button secondary">Adicionar selo</span>
               <span class="button tertiary">Ação neutra</span>
+              <span class="button disabled">Indisponível</span>
             </div>
           </article>
           <article class="component">
@@ -1283,7 +1498,7 @@
                 <span class="eyebrow">Próxima viagem</span>
                 <strong>Rio de Janeiro</strong>
                 <p>02/04/2026 a 05/04/2026</p>
-                <span class="button secondary">Abrir viagem</span>
+                <span class="button secondary">Abrir passaporte</span>
               </div>
             </div>
           </article>
@@ -1299,8 +1514,9 @@
           <article class="component">
             <h3>Status</h3>
             <div class="button-row">
-              <span class="status">Próxima</span>
-              <span class="status done">Finalizada</span>
+              <span class="status">Embarque</span>
+              <span class="status done">Confirmado</span>
+              <span class="status alert">Pendente</span>
             </div>
           </article>
           <article class="component">
@@ -1317,19 +1533,29 @@
           </article>
           <article class="component">
             <h3>Bloco de reserva</h3>
-            <p>Use papel kraft para passagens, hospedagem, seguro e links importantes que precisam ser encontrados rápido.</p>
+            <p>Use papel envelhecido para passagens, hospedagem, seguro e links importantes que precisam ser encontrados rápido.</p>
           </article>
           <article class="component">
             <h3>Card de roteiro</h3>
             <p>Use cidade, dia, título, passeios e notas em formato de diário visual, com fotos e pequenas anotações.</p>
           </article>
         </div>
+        <div class="spec-list" style="margin-top:16px;">
+          <article class="card">
+            <strong>Estados obrigatórios</strong>
+            <p>Todo botão, campo e card clicável precisa ter estado ao passar o mouse, foco visível, indisponível, carregando e erro quando aplicável.</p>
+          </article>
+          <article class="card">
+            <strong>Regra de interação</strong>
+            <p>Ao passar o mouse, o papel pode levantar; foco deve ser claro e funcional; erro usa terracota apenas com texto explicativo.</p>
+          </article>
+        </div>
       </section>
 
       <section class="panel">
         <span class="eyebrow">06</span>
-        <h2>Imagem E Moodboard</h2>
-        <p>As imagens devem vir por link e representar o clima da viagem. Na home, podem formar colagem; na página da viagem, devem aparecer em grid para não cobrir informações.</p>
+        <h2>Imagem E Painel Visual</h2>
+        <p>As imagens devem vir por link e representar o clima da viagem. Na tela inicial, podem formar colagem; na página da viagem, devem aparecer em grade para não cobrir informações.</p>
         <div class="photo-grid">
           <figure class="photo">
             <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=900&q=84" alt="" />
@@ -1348,6 +1574,16 @@
             <figcaption>foto 4</figcaption>
           </figure>
         </div>
+        <div class="spec-list" style="margin-top:16px;">
+          <article class="card">
+            <strong>Escolha de imagem</strong>
+            <p>Priorize fotos com memória real da viagem, lugares reconhecíveis, bilhetes, comida, mapas e detalhes pessoais. Evite imagens genéricas demais.</p>
+          </article>
+          <article class="card">
+            <strong>Regra técnica</strong>
+            <p>Use proporções estáveis, recorte previsível, espaço reservado de papel e texto alternativo quando a foto carregar informação importante.</p>
+          </article>
+        </div>
       </section>
 
       <section class="panel">
@@ -1357,15 +1593,15 @@
         <div class="density-list">
           <article class="density-card">
             <strong>Baixa</strong>
-            <p>Formulários, documentos, links, números de reserva e listas. Use fundo de papel, bordas e um detalhe visual leve.</p>
+            <p>Formulários, documentos, links, números de reserva e listas. Use fundo de papel, bordas e no máximo um detalhe visual leve.</p>
           </article>
           <article class="density-card">
             <strong>Média</strong>
-            <p>Página da viagem, blocos de hospedagem, passagens e tarefas. Use fotos em grid, etiquetas e papéis rasgados.</p>
+            <p>Página da viagem, blocos de hospedagem, passagens e tarefas. Use fotos em grade, etiquetas e até dois papéis sobrepostos.</p>
           </article>
           <article class="density-card">
             <strong>Alta</strong>
-            <p>Home, capa da viagem, cards de viagem finalizada e roteiro. Use colagem, letras de revista, fotos inclinadas e rabiscos.</p>
+            <p>Tela inicial, capa da viagem, cartões de viagem finalizada e roteiro. Use colagem, letras de revista, fotos inclinadas e rabiscos com intenção.</p>
           </article>
         </div>
       </section>
@@ -1388,7 +1624,7 @@
           </article>
           <article class="rule-card">
             <h3>🗺️ Roteiro</h3>
-            <p>Pode ser a tela mais expressiva: timeline, cidade por cidade, dias em cartões, notas manuscritas e moodboard visual.</p>
+            <p>Pode ser a tela mais expressiva: linha do tempo, cidade por cidade, dias em cartões, notas manuscritas e painel visual.</p>
           </article>
         </div>
       </section>
@@ -1398,17 +1634,17 @@
         <h2>Padrões De Layout Inspirados Nas Referências</h2>
         <div class="pattern-list">
           <article class="pattern grid-paper">
-            <span class="script">grid journal</span>
+            <span class="script">diário em grade</span>
             <h3>Papel quadriculado</h3>
-            <p>Use como base para home, roteiro e páginas de moodboard. Funciona bem com fotos, setas e notas soltas.</p>
+            <p>Use como base para tela inicial, roteiro e páginas de painel visual. Funciona bem com fotos, setas e notas soltas.</p>
           </article>
           <article class="pattern torn">
-            <span class="script">paper scraps</span>
+            <span class="script">recortes de papel</span>
             <h3>Papéis rasgados</h3>
             <p>Use em blocos de informação: seguro, acomodação, documentos e links importantes.</p>
           </article>
           <article class="pattern desktop">
-            <span class="script">notebook page</span>
+            <span class="script">folha de caderno</span>
             <h3>Folha pautada</h3>
             <p>Use para checklists, tarefas, lista de mala e observações do roteiro.</p>
           </article>
@@ -1422,24 +1658,24 @@
         <div class="timeline-demo">
           <div class="timeline-line"></div>
           <div class="week-item w1">
-            <strong>MON</strong>
+            <strong>SEG</strong>
             <img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=400&q=84" alt="" />
             <p>chegada + café</p>
           </div>
           <div class="week-item w2">
-            <strong>TUE</strong>
+            <strong>TER</strong>
             <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=84" alt="" />
             <p>museus</p>
           </div>
           <div class="week-item w3">
-            <strong>FRI</strong>
+            <strong>SEX</strong>
             <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=400&q=84" alt="" />
             <p>jantar</p>
           </div>
           <div class="week-item w4">
-            <strong>SUN</strong>
+            <strong>DOM</strong>
             <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400&q=84" alt="" />
-            <p>last stop</p>
+            <p>última parada</p>
           </div>
         </div>
       </section>
@@ -1481,7 +1717,7 @@
             <ul>
               <li>Sobrepor imagens em páginas de informação.</li>
               <li>Usar muitos estilos diferentes na mesma tela.</li>
-              <li>Transformar o planner em formulário pesado demais.</li>
+              <li>Transformar o planejador em formulário pesado demais.</li>
               <li>Esconder links importantes de reserva e roteiro.</li>
             </ul>
           </article>
@@ -1490,11 +1726,12 @@
 
       <section class="panel">
         <span class="eyebrow">13</span>
-        <h2>Collage Typography</h2>
+        <h2>Tipografia De Colagem</h2>
         <p>
           Títulos de viagem e cidades podem usar letras recortadas como assinatura visual do produto.
           A referência deve ser mais próxima de letras de revista: cada caractere parece vir de uma
-          fonte, material, cor ou textura diferente.
+          fonte, material, cor ou textura diferente. Esta é a área onde a paleta pode quebrar as regras
+          com mais liberdade, desde que continue parecendo recorte físico e não carnaval digital.
         </p>
 
         <div class="collage-title-demo">
@@ -1528,7 +1765,7 @@
           <article class="card dont">
             <h3>🚫 Quando evitar</h3>
             <ul>
-              <li>Labels de formulário.</li>
+              <li>Rótulos de formulário.</li>
               <li>Textos longos ou instruções.</li>
               <li>Listas de documentos e tarefas.</li>
               <li>Mais de um título colagem por tela.</li>
@@ -1553,6 +1790,16 @@
           <article class="card">
             <h3>🎯 Contraste forte</h3>
             <p>Botões, status e ações importantes precisam ter borda escura, texto legível e área de clique confortável.</p>
+          </article>
+        </div>
+        <div class="spec-list" style="margin-top:16px;">
+          <article class="card">
+            <strong>Critérios mínimos</strong>
+            <p>Texto funcional com contraste AA, toque mínimo de 44px, foco visível e nenhuma informação crítica sobre foto.</p>
+          </article>
+          <article class="card">
+            <strong>Uso de fontes expressivas</strong>
+            <p>Caveat e letras recortadas não devem aparecer em textos menores que precisam ser escaneados rapidamente.</p>
           </article>
         </div>
       </section>
