@@ -4,8 +4,34 @@ import { ImageWithFallback } from "../../components/ImageWithFallback.jsx";
 import { extractRouteHeadings, markdownToBlocks, paginateRouteBlocks } from "../../itinerary.js";
 import { ChecklistBlock, ChecklistModal, ListBlock } from "./ChecklistBlocks.jsx";
 import { DiarySection } from "./DiarySection.jsx";
+import { ItineraryHelp } from "./ItineraryHelp.jsx";
 import { RouteBlocks } from "./RouteBlocks.jsx";
-import { normalizeChecklist } from "./tripModel.js";
+import { formatTripPeriod, normalizeChecklist } from "./tripModel.js";
+
+const transportLabels = {
+  aviao: "Avião",
+  trem: "Trem",
+  onibus: "Ônibus",
+  carro: "Carro",
+  barco: "Barco",
+  outro: "Outro"
+};
+
+function formatAccommodationDateTime(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short"
+  }).format(date);
+}
 
 export function Detail({
   trip,
@@ -58,7 +84,7 @@ export function Detail({
           <button className="back-button" onClick={onBack}>← Voltar</button>
           <span className={trip.status === "finalizada" ? "stamp success" : "stamp"}>{trip.status === "finalizada" ? "Viagem finalizada" : "Em planejamento"}</span>
           <CollageTitle text={trip.name} />
-          <p>{trip.destination || "Destino em aberto"} · {trip.period || "Período a definir"}</p>
+          <p>{trip.destination || "Destino em aberto"} · {formatTripPeriod(trip)}</p>
         </div>
         <div className="actions">
           <button className="button secondary" onClick={() => onEdit(trip)}>Editar</button>
@@ -89,17 +115,35 @@ export function Detail({
           <p>{trip.hasInsurance ? `Bilhete: ${trip.insuranceTicket || "não informado"}` : "Sem seguro cadastrado."}</p>
         </article>
         <article className="info-block">
-          <h3>Passagens</h3>
-          <p>{trip.transport || "Nenhuma informação de transporte cadastrada."}</p>
-          <p>{trip.reservationCode ? `Reserva: ${trip.reservationCode}` : ""}</p>
-          <p>{trip.locator ? `Localizador: ${trip.locator}` : ""}</p>
+          <h3>Transporte</h3>
+          <p>{trip.transportType ? `Meio: ${transportLabels[trip.transportType] || trip.transportType}` : "Meio de transporte não informado."}</p>
+          {trip.transportType === "aviao" ? (
+            <>
+              <p>{trip.transport ? `Número da passagem ou transporte: ${trip.transport}` : "Número da passagem não informado."}</p>
+              <p>{trip.reservationCode ? `Reserva: ${trip.reservationCode}` : ""}</p>
+              <p>{trip.locator ? `Localizador: ${trip.locator}` : ""}</p>
+            </>
+          ) : null}
         </article>
         <article className="info-block">
           <h3>Hospedagem</h3>
-          <p>{trip.accommodation || "Hospedagem não cadastrada."}</p>
-          <p>{trip.accommodationDates}</p>
-          <p>{trip.accommodationAddress}</p>
-          {trip.accommodationLink ? <a href={trip.accommodationLink} target="_blank" rel="noreferrer">Abrir reserva</a> : null}
+          {trip.accommodations?.length ? (
+            <div className="accommodation-summary-list">
+              {trip.accommodations.map((item, index) => (
+                <div className="accommodation-summary" key={`${item.name}-${index}`}>
+                  <strong>{item.name || "Hospedagem sem nome"}</strong>
+                  <p>{item.destination ? `Destino: ${item.destination}` : "Destino não informado."}</p>
+                  <p>{item.checkInAt ? `Check-in: ${formatAccommodationDateTime(item.checkInAt)}` : ""}</p>
+                  <p>{item.checkOutAt ? `Check-out: ${formatAccommodationDateTime(item.checkOutAt)}` : ""}</p>
+                  <p>{item.dates}</p>
+                  <p>{item.address}</p>
+                  {item.link ? <a href={item.link} target="_blank" rel="noreferrer">Abrir reserva</a> : null}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Hospedagem não cadastrada.</p>
+          )}
         </article>
       </section>
 
@@ -118,6 +162,7 @@ export function Detail({
             <h2>Linha do tempo da viagem</h2>
           </div>
           <div className="actions">
+            <ItineraryHelp />
             {!editingItinerary ? (
               <>
                 <button className="button secondary" type="button" onClick={onOpenItinerary}>Abrir roteiro</button>

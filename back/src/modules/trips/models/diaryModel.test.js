@@ -37,4 +37,14 @@ describe("diaryModel", () => {
     expect(() => validateDiaryEntry({ placeType: "", placeName: "Lisboa" })).toThrow();
     expect(() => validateDiaryEntry({ placeType: "cidade", placeName: "" })).toThrow();
   });
+
+  it("rejects invalid place types and unsafe photo urls", () => {
+    expect(() => validateDiaryEntry({ placeType: "hotel", placeName: "Lisboa", note: "", photos: [] })).toThrow();
+    expect(() => validateDiaryEntry({
+      placeType: "cidade",
+      placeName: "Lisboa",
+      note: "",
+      photos: [{ url: "javascript:alert(1)", caption: "" }]
+    })).toThrow();
+  });
 });

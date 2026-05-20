@@ -36,6 +36,9 @@ function createDatabase(existingIds = []) {
     },
     tripPackingItem: {
       async deleteMany() {}
+    },
+    tripAccommodation: {
+      async deleteMany() {}
     }
   };
 }

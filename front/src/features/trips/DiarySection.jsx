@@ -10,7 +10,7 @@ function placeTypeLabel(placeType) {
   return placeType === diaryPlaceTypes.COUNTRY ? "País" : "Cidade";
 }
 
-function EntryCollage({ entry, onOpen }) {
+function EntryCollage({ entry, onOpen, onEdit }) {
   const photos = entry.photos || [];
   const visiblePhotos = photos.slice(0, VISUAL_LIMIT);
   const hiddenCount = Math.max(photos.length - visiblePhotos.length, 0);
@@ -22,6 +22,11 @@ function EntryCollage({ entry, onOpen }) {
         <h3>{entry.placeName}</h3>
         {entry.note ? <p>{entry.note}</p> : <p>Sem nota registrada.</p>}
       </button>
+
+      <div className="diary-card-actions" aria-label={`Ações da memória de ${entry.placeName}`}>
+        <button className="diary-icon-button eye" type="button" onClick={() => onOpen(entry)} aria-label={`Ver memória de ${entry.placeName}`} title="Ver" />
+        <button className="diary-icon-button" type="button" onClick={() => onEdit(entry)} aria-label={`Editar memória de ${entry.placeName}`} title="Editar">✎</button>
+      </div>
 
       <div className="diary-collage" aria-hidden="true">
         {visiblePhotos.map((photo, index) => (
@@ -70,7 +75,7 @@ function DiaryEditorModal({ routeSuggestions, initialEntry, onSave, onClose, loa
             <h2>{initialEntry?.id ? "Editar memória" : "Nova memória"}</h2>
             <p>Registre notas e fotos para uma cidade ou país.</p>
           </div>
-          <button className="back-button" type="button" onClick={onClose}>Fechar</button>
+          <button className="modal-close-button" type="button" onClick={onClose} aria-label="Fechar">×</button>
         </div>
 
         {error ? <p className="form-error">{error}</p> : null}
@@ -141,7 +146,7 @@ function DiaryViewerModal({ entry, onEdit, onDelete, onClose }) {
             <h2>{entry.placeName}</h2>
             <p>{placeTypeLabel(entry.placeType)}</p>
           </div>
-          <button className="back-button" type="button" onClick={onClose}>Fechar</button>
+          <button className="modal-close-button" type="button" onClick={onClose} aria-label="Fechar">×</button>
         </div>
 
         {entry.note ? <p className="diary-note">{entry.note}</p> : <p className="diary-note empty">Sem nota registrada.</p>}
@@ -156,9 +161,8 @@ function DiaryViewerModal({ entry, onEdit, onDelete, onClose }) {
         </div>
 
         <div className="actions diary-viewer-actions">
+          <button className="button ghost danger" type="button" onClick={() => onDelete(entry)}>Excluir</button>
           <button className="button secondary" type="button" onClick={() => onEdit(entry)}>Editar</button>
-          <button className="button ghost" type="button" onClick={() => onDelete(entry)}>Excluir</button>
-          <button className="button ghost" type="button" onClick={onClose}>Fechar</button>
         </div>
       </article>
     </div>
@@ -235,7 +239,12 @@ export function DiarySection({ trip, routeSuggestions = [], onCreate, onUpdate, 
       {entries.length ? (
         <div className="diary-grid">
           {entries.map((entry) => (
-            <EntryCollage key={entry.id} entry={entry} onOpen={setViewerEntry} />
+            <EntryCollage
+              key={entry.id}
+              entry={entry}
+              onOpen={setViewerEntry}
+              onEdit={setEditorEntry}
+            />
           ))}
         </div>
       ) : (

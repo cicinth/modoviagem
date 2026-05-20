@@ -1,7 +1,11 @@
-export function errorHandler(error, _request, response, _next) {
-  console.error(error);
+import { AppError } from "../errors/AppError.js";
 
-  response.status(error.status || 500).json({
-    message: error.message || "Erro interno no servidor"
-  });
+export function errorHandler(error, _request, response, _next) {
+  if (error instanceof AppError) {
+    response.status(error.status).json({ message: error.message });
+    return;
+  }
+
+  console.error(error);
+  response.status(500).json({ message: "Erro interno no servidor" });
 }

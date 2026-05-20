@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizeChecklist, toFormState, toPayload } from "./tripModel.js";
+import { normalizeChecklist, toDateTimeInputValue, toFormState, toPayload } from "./tripModel.js";
 
 describe("tripModel", () => {
   it("converts API trip arrays into editable text fields", () => {
@@ -43,5 +43,39 @@ describe("tripModel", () => {
       { text: "Passaporte", done: false },
       { text: "Seguro", done: true }
     ]);
+  });
+
+  it("converts accommodation timestamps between API and payload", () => {
+    const form = toFormState({
+      name: "Portugal",
+      accommodations: [{
+        destination: "Lisboa",
+        name: "Hotel Centro",
+        checkInAt: "2026-04-02T15:00",
+        checkOutAt: "2026-04-05T11:00"
+      }]
+    });
+
+    expect(form.accommodations[0]).toMatchObject({
+      checkInAt: "2026-04-02T15:00",
+      checkOutAt: "2026-04-05T11:00"
+    });
+
+    const payload = toPayload({
+      ...form,
+      imageLinksText: "",
+      documentsText: "",
+      tasksText: "",
+      packingListText: ""
+    });
+
+    expect(payload.accommodations[0]).toMatchObject({
+      checkInAt: "2026-04-02T15:00",
+      checkOutAt: "2026-04-05T11:00"
+    });
+  });
+
+  it("returns empty value for invalid datetime input", () => {
+    expect(toDateTimeInputValue("invalid")).toBe("");
   });
 });

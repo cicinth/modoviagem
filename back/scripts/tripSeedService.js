@@ -1,4 +1,5 @@
 import {
+  toAccommodationCreateMany,
   toChecklistCreateMany,
   toDocumentCreateMany,
   toImageLinkCreateMany,
@@ -59,7 +60,8 @@ async function createTripFromSeed(rawTrip, database, defaultUserId) {
       imageLinks: { createMany: { data: toImageLinkCreateMany(trip.imageLinks) } },
       documents: { createMany: { data: toDocumentCreateMany(trip.documents) } },
       tasks: { createMany: { data: toChecklistCreateMany(trip.tasks) } },
-      packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } }
+      packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } },
+      accommodations: { createMany: { data: toAccommodationCreateMany(trip.accommodations) } }
     }
   });
 }
@@ -73,6 +75,7 @@ async function hydrateDefaultTrip(rawTrip, database, defaultUserId) {
     await transaction.tripDocument.deleteMany({ where: { tripId: rawTrip.id } });
     await transaction.tripTask.deleteMany({ where: { tripId: rawTrip.id } });
     await transaction.tripPackingItem.deleteMany({ where: { tripId: rawTrip.id } });
+    await transaction.tripAccommodation.deleteMany({ where: { tripId: rawTrip.id } });
 
     await transaction.trip.update({
       where: { id: rawTrip.id },
@@ -84,7 +87,8 @@ async function hydrateDefaultTrip(rawTrip, database, defaultUserId) {
         imageLinks: { createMany: { data: toImageLinkCreateMany(trip.imageLinks) } },
         documents: { createMany: { data: toDocumentCreateMany(trip.documents) } },
         tasks: { createMany: { data: toChecklistCreateMany(trip.tasks) } },
-        packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } }
+        packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } },
+        accommodations: { createMany: { data: toAccommodationCreateMany(trip.accommodations) } }
       }
     });
   });

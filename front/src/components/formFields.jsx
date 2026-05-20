@@ -1,7 +1,7 @@
 export function Field({ label, children }) {
   return (
     <label className="field">
-      <span>{label}</span>
+      {label ? <span>{label}</span> : null}
       {children}
     </label>
   );

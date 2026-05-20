@@ -1,6 +1,7 @@
 import { prisma } from "../../../config/prisma.js";
 import { normalizeDiaryEntryInput, validateDiaryEntry } from "../models/diaryModel.js";
 import {
+  toAccommodationCreateMany,
   toChecklistCreateMany,
   toDocumentCreateMany,
   toImageLinkCreateMany,
@@ -41,7 +42,8 @@ export class PrismaTripRepository {
         imageLinks: { createMany: { data: toImageLinkCreateMany(trip.imageLinks) } },
         documents: { createMany: { data: toDocumentCreateMany(trip.documents) } },
         tasks: { createMany: { data: toChecklistCreateMany(trip.tasks) } },
-        packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } }
+        packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } },
+        accommodations: { createMany: { data: toAccommodationCreateMany(trip.accommodations) } }
       },
       include: tripRelations
     });
@@ -61,6 +63,7 @@ export class PrismaTripRepository {
       await transaction.tripDocument.deleteMany({ where: { tripId: id } });
       await transaction.tripTask.deleteMany({ where: { tripId: id } });
       await transaction.tripPackingItem.deleteMany({ where: { tripId: id } });
+      await transaction.tripAccommodation.deleteMany({ where: { tripId: id } });
 
       return transaction.trip.update({
         where: { id },
@@ -69,7 +72,8 @@ export class PrismaTripRepository {
           imageLinks: { createMany: { data: toImageLinkCreateMany(trip.imageLinks) } },
           documents: { createMany: { data: toDocumentCreateMany(trip.documents) } },
           tasks: { createMany: { data: toChecklistCreateMany(trip.tasks) } },
-          packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } }
+          packingItems: { createMany: { data: toChecklistCreateMany(trip.packingList) } },
+          accommodations: { createMany: { data: toAccommodationCreateMany(trip.accommodations) } }
         },
         include: tripRelations
       });

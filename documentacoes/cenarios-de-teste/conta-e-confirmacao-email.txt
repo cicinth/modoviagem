@@ -1,0 +1,89 @@
+Funcionalidade: Cadastro seguro
+
+  Cenário: Cadastrar conta com senha forte
+    Dado que estou criando uma conta
+    Quando informo nome, e-mail, senha forte e confirmação igual
+    Então a conta deve ser criada
+    E o sistema deve gerar uma confirmação de e-mail
+
+  Cenário: Bloquear senha fraca no cadastro
+    Dado que estou criando uma conta
+    Quando informo uma senha sem maiúscula, minúscula, número ou símbolo
+    Então o cadastro deve falhar
+    E o sistema deve mostrar os requisitos da senha
+
+  Cenário: Bloquear confirmação de senha diferente
+    Dado que estou criando uma conta
+    Quando a senha e a confirmação são diferentes
+    Então o cadastro deve falhar
+    E a conta não deve ser criada
+
+  Cenário: Bloquear e-mail já cadastrado
+    Dado que já existe uma conta com o e-mail informado
+    Quando tento criar outra conta com o mesmo e-mail
+    Então o cadastro deve falhar
+    E nenhuma nova conta deve ser criada
+
+Funcionalidade: Confirmação de e-mail
+
+  Cenário: Confirmar e-mail com link válido
+    Dado que criei uma conta
+    E recebi um link de confirmação válido
+    Quando acesso o link
+    Então meu e-mail deve ser marcado como confirmado
+    E o token usado deve ser invalidado
+
+  Cenário: Bloquear token expirado
+    Dado que o token de confirmação expirou
+    Quando acesso o link de confirmação
+    Então a confirmação deve falhar
+    E o e-mail deve continuar não confirmado
+
+  Cenário: Bloquear reuso de token
+    Dado que já usei um link de confirmação
+    Quando acesso o mesmo link novamente
+    Então a confirmação deve falhar
+    E nenhum dado da conta deve ser alterado
+
+  Cenário: Reenviar confirmação com limite de tentativas
+    Dado que meu e-mail ainda não foi confirmado
+    Quando peço reenvio muitas vezes em pouco tempo
+    Então o sistema deve bloquear temporariamente novos envios
+    E deve informar que preciso aguardar
+
+Funcionalidade: Menu do usuário
+
+  Cenário: Abrir Minha conta pelo menu
+    Dado que estou autenticado
+    Quando abro o menu do usuário
+    Então devo ver as opções Minha conta e Sair
+
+  Cenário: Editar nome sem senha atual
+    Dado que estou em Minha conta
+    Quando altero apenas meu nome
+    Então o sistema deve salvar a alteração
+    E minha sessão deve continuar ativa
+
+  Cenário: Alterar e-mail com senha atual
+    Dado que estou em Minha conta
+    Quando informo um novo e-mail e minha senha atual correta
+    Então o sistema deve salvar o novo e-mail como não confirmado
+    E deve enviar um link de confirmação para o novo e-mail
+
+  Cenário: Bloquear alteração de e-mail sem senha atual
+    Dado que estou em Minha conta
+    Quando tento alterar meu e-mail sem informar a senha atual correta
+    Então a alteração deve falhar
+    E o e-mail anterior deve ser mantido
+
+  Cenário: Alterar senha com confirmação
+    Dado que estou em Minha conta
+    Quando informo senha atual correta, nova senha forte e confirmação igual
+    Então a senha deve ser alterada
+    E a sessão deve continuar ativa
+
+  Cenário: Bloquear alteração de senha com confirmação diferente
+    Dado que estou em Minha conta
+    Quando a nova senha e a confirmação são diferentes
+    Então a alteração deve falhar
+    E a senha antiga deve continuar válida

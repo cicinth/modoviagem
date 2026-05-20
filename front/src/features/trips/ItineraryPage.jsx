@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { markdownToBlocks } from "../../itinerary.js";
 import { RouteBlocks } from "./RouteBlocks.jsx";
+import { formatTripPeriod } from "./tripModel.js";
 
 export function ItineraryPage({ trip, onBack }) {
   const routeBlocks = useMemo(() => markdownToBlocks(trip.itineraryMarkdown), [trip.itineraryMarkdown]);
@@ -12,7 +13,7 @@ export function ItineraryPage({ trip, onBack }) {
           <button className="back-button" type="button" onClick={onBack}>← Voltar para viagem</button>
           <span className="eyebrow">Roteiro completo</span>
           <h1>{trip.name}</h1>
-          <p>{trip.destination || "Destino em aberto"} · {trip.period || "Período a definir"}</p>
+          <p>{trip.destination || "Destino em aberto"} · {formatTripPeriod(trip)}</p>
         </div>
       </header>
       <section className="panel itinerary itinerary-full-content">

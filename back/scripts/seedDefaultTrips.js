@@ -1,4 +1,5 @@
 import "dotenv/config";
+import crypto from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,26 +12,26 @@ import {
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const defaultTripsFile = path.resolve(currentDir, "../prisma/seed/defaultTrips.json");
-const demoUserEmail = "demo@viajario.local";
-const demoUserPassword = "viajario123";
+const defaultUserEmail = process.env.DEFAULT_USER_EMAIL || "demo@viajario.local";
+const defaultUserPassword = process.env.DEFAULT_USER_PASSWORD || crypto.randomUUID();
 
 async function main() {
   const defaultTrips = await loadTripsFromFile(defaultTripsFile, readFile);
-  const demoUser = await ensureDemoUser();
+  const defaultUser = await ensureDefaultUser();
   await prisma.trip.updateMany({
     where: { userId: null },
-    data: { userId: demoUser.id }
+    data: { userId: defaultUser.id }
   });
 
-  const result = await seedTrips(defaultTrips, prisma, demoUser.id);
+  const result = await seedTrips(defaultTrips, prisma, defaultUser.id);
 
   console.log(
     `Seed concluido. Criadas: ${result.created}. Hidratadas: ${result.hydrated}. Ignoradas: ${result.skipped}.`
   );
 }
 
-async function ensureDemoUser() {
-  const existingUser = await prisma.user.findUnique({ where: { email: demoUserEmail } });
+async function ensureDefaultUser() {
+  const existingUser = await prisma.user.findUnique({ where: { email: defaultUserEmail } });
 
   if (existingUser) {
     return existingUser;
@@ -38,10 +39,10 @@ async function ensureDemoUser() {
 
   return prisma.user.create({
     data: {
-      id: "11111111-1111-1111-1111-111111111111",
-      name: "Demo Viajário",
-      email: demoUserEmail,
-      passwordHash: hashPassword(demoUserPassword)
+      id: "22222222-2222-2222-2222-222222222222",
+      name: "Cinthia Cardoso",
+      email: defaultUserEmail,
+      passwordHash: hashPassword(defaultUserPassword)
     }
   });
 }

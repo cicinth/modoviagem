@@ -29,10 +29,13 @@ function signPayload(payload) {
 }
 
 export function createAuthToken(user) {
+  const issuedAt = Math.floor(Date.now() / 1000);
   const payload = Buffer.from(JSON.stringify({
     sub: user.id,
     email: user.email,
-    name: user.name
+    name: user.name,
+    iat: issuedAt,
+    exp: issuedAt + env.authTokenTtlSeconds
   })).toString("base64url");
 
   return `${payload}.${signPayload(payload)}`;
@@ -67,7 +70,14 @@ export function verifyAuthToken(token) {
     throw new AppError("Sessão inválida", 401);
   }
 
-  return data;
+  if (!data.exp || data.exp < Math.floor(Date.now() / 1000)) {
+    throw new AppError("Sessão expirada", 401);
+  }
+
+  return {
+    ...data,
+    id: data.sub
+  };
 }
 
 export function getBearerToken(request) {
@@ -78,4 +88,18 @@ export function getBearerToken(request) {
   }
 
   return authorization.slice(7).trim();
+}
+
+export function getCookieToken(request, cookieName = "viajario_session") {
+  const cookies = String(request.headers.cookie || "")
+    .split(";")
+    .map((cookie) => cookie.trim())
+    .filter(Boolean);
+
+  const sessionCookie = cookies.find((cookie) => cookie.startsWith(`${cookieName}=`));
+  return sessionCookie ? decodeURIComponent(sessionCookie.slice(cookieName.length + 1)) : "";
+}
+
+export function getSessionToken(request) {
+  return getBearerToken(request) || getCookieToken(request);
 }

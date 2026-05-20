@@ -4,7 +4,8 @@ import { Field } from "../../components/formFields.jsx";
 const initialForm = {
   name: "",
   email: "",
-  password: ""
+  password: "",
+  passwordConfirmation: ""
 };
 
 export function AuthForm({ onLogin, onRegister, loading = false, error = "", onToggleMode, mode = "login" }) {
@@ -80,9 +81,19 @@ export function AuthForm({ onLogin, onRegister, loading = false, error = "", onT
                 type="password"
                 value={form.password}
                 onChange={(event) => update("password", event.target.value)}
-                placeholder="Mínimo de 6 caracteres"
+                placeholder="Mínimo 8, com número e símbolo"
               />
             </Field>
+            {mode === "register" ? (
+              <Field label="Confirmar senha">
+                <input
+                  type="password"
+                  value={form.passwordConfirmation}
+                  onChange={(event) => update("passwordConfirmation", event.target.value)}
+                  placeholder="Repita a senha"
+                />
+              </Field>
+            ) : null}
           </div>
 
           {error ? <p className="form-error">{error}</p> : null}

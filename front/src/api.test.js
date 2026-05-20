@@ -20,6 +20,7 @@ describe("tripsApi", () => {
 
     await expect(tripsApi.list()).resolves.toEqual(trips);
     expect(fetchSpy).toHaveBeenCalledWith("http://localhost:3333/api/trips", {
+      credentials: "include",
       headers: { "Content-Type": "application/json" }
     });
   });
@@ -31,6 +32,7 @@ describe("tripsApi", () => {
     await tripsApi.create(trip);
 
     expect(fetchSpy).toHaveBeenCalledWith("http://localhost:3333/api/trips", {
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(trip),
       headers: { "Content-Type": "application/json" }
@@ -43,6 +45,7 @@ describe("tripsApi", () => {
     await authApi.me("token-123");
 
     expect(fetchSpy).toHaveBeenCalledWith("http://localhost:3333/api/auth/me", {
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer token-123"

@@ -51,6 +51,12 @@ button {
   padding: 36px 0 64px;
 }
 
+.page-user-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 18px;
+}
+
 .auth-page {
   min-height: 100vh;
   display: grid;
@@ -238,6 +244,76 @@ button {
   gap: 12px;
   align-items: center;
   margin-top: 12px;
+}
+
+.account-inline-warning {
+  width: fit-content;
+  padding: 10px 12px;
+  border: 2px dashed var(--aged-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--aged-gold));
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.user-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.user-menu-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 900;
+  box-shadow: var(--shadow-lift);
+}
+
+.user-menu-button span {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--passport);
+  color: var(--surface);
+  font-size: 0.72rem;
+}
+
+.user-menu-popover {
+  position: absolute;
+  z-index: 12;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: 180px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 8px 10px 0 rgba(46, 42, 39, 0.16);
+}
+
+.user-menu-popover button {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: 2px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 900;
+  text-align: left;
+}
+
+.user-menu-popover button:last-child {
+  border-bottom: 0;
 }
 
 .cover-board {
@@ -505,6 +581,18 @@ button {
 
 .button.ghost {
   background: var(--surface);
+}
+
+.button.compact {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  box-shadow: none;
+  font-size: 0.78rem;
+}
+
+.button.danger {
+  color: #8f2e24;
 }
 
 .trip-grid {
@@ -804,12 +892,48 @@ select:focus {
   background: color-mix(in srgb, var(--memory-rose) 18%, var(--surface));
 }
 
+.accommodation-list,
+.accommodation-summary-list {
+  display: grid;
+  gap: 14px;
+}
+
+.accommodation-editor,
+.accommodation-summary {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 2px solid rgba(46, 42, 39, 0.24);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 86%, var(--aged-gold));
+}
+
+.accommodation-summary strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.18rem;
+}
+
+.muted-note {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
 .form-error,
 .global-error {
   padding: 12px;
   border: 2px solid var(--line);
   border-radius: 8px;
   background: var(--terracotta);
+  color: var(--surface);
+  font-weight: 800;
+}
+
+.form-success {
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--deep-green);
   color: var(--surface);
   font-weight: 800;
 }
@@ -951,8 +1075,61 @@ select:focus {
   font-size: 2.3rem;
 }
 
+.modal-close-button {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: var(--shadow-lift);
+}
+
 .modal-list {
   gap: 12px;
+}
+
+.account-modal {
+  width: min(760px, 100%);
+}
+
+.account-form {
+  display: grid;
+  gap: 16px;
+}
+
+.account-warning {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 12px;
+  border: 2px dashed var(--aged-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--aged-gold));
+}
+
+.account-warning strong,
+.account-warning span {
+  grid-column: 1;
+}
+
+.account-warning .button {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+}
+
+.confirm-shell {
+  grid-template-columns: minmax(0, 680px);
+  justify-content: center;
 }
 
 .diary-section {
@@ -968,9 +1145,10 @@ select:focus {
 }
 
 .diary-card {
+  position: relative;
   display: grid;
   gap: 12px;
-  padding: 16px;
+  padding: 44px 16px 16px;
   border: 2px solid var(--line);
   border-radius: 8px;
   background:
@@ -1001,6 +1179,52 @@ select:focus {
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.diary-card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.diary-icon-button {
+  position: relative;
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 3px 4px 0 rgba(46, 42, 39, 0.12);
+}
+
+.diary-icon-button.danger {
+  color: #8f2e24;
+}
+
+.diary-icon-button.eye::before {
+  width: 15px;
+  height: 9px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  content: "";
+}
+
+.diary-icon-button.eye::after {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
 }
 
 .diary-card-chip {
@@ -1161,7 +1385,7 @@ select:focus {
 }
 
 .diary-viewer-actions {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .itinerary {
@@ -1185,6 +1409,98 @@ select:focus {
 
 .itinerary-header h2 {
   margin-top: 0;
+}
+
+.itinerary-help {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.info-button {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-rose);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 900;
+  box-shadow: var(--shadow-lift);
+}
+
+.itinerary-help-card {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(420px, calc(100vw - 42px));
+  padding: 16px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 10px 12px 0 rgba(46, 42, 39, 0.16);
+}
+
+.itinerary-help-card h3 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.itinerary-help-card p,
+.itinerary-help-card li {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.itinerary-help-card ul {
+  margin: 10px 0;
+  padding-left: 18px;
+}
+
+.prompt-tip {
+  display: grid;
+  gap: 8px;
+}
+
+.prompt-tip span,
+.field-heading span {
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.prompt-tip pre {
+  max-height: 220px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  padding: 12px;
+  border: 2px dashed var(--aged-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 88%, var(--aged-gold));
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.itinerary-form-block {
+  display: grid;
+  gap: 8px;
+}
+
+.field-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .itinerary-editor {

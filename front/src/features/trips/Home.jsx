@@ -4,6 +4,8 @@ import homeCollage2 from "../../assets/home-collage-2.jpg";
 import homeCollage3 from "../../assets/home-collage-3.jpg";
 import homeCollage4 from "../../assets/home-collage-4.jpg";
 import homeCollage5 from "../../assets/home-collage-5.jpg";
+import { UserMenu } from "../auth/UserMenu.jsx";
+import { formatTripPeriod } from "./tripModel.js";
 
 const homeCollageImages = [homeCollage3, homeCollage2, homeCollage1, homeCollage4, homeCollage5];
 
@@ -17,7 +19,7 @@ function TripCard({ trip, onOpen, onEdit, onFinalize }) {
         <span className={trip.status === "finalizada" ? "stamp success" : "stamp"}>{trip.status === "finalizada" ? "Finalizada" : "Em planejamento"}</span>
         <h3>{trip.name}</h3>
         <p>{trip.destination || "Destino em aberto"}</p>
-        <p>{trip.period || "Período a definir"}</p>
+        <p>{formatTripPeriod(trip)}</p>
         <div className="actions">
           <button className="button secondary" onClick={() => onOpen(trip)}>Abrir passaporte</button>
           <button className="button ghost" onClick={() => onEdit(trip)}>Editar</button>
@@ -30,22 +32,28 @@ function TripCard({ trip, onOpen, onEdit, onFinalize }) {
   );
 }
 
-export function Home({ trips, loading, activeTab, setActiveTab, user, onLogout, onNew, onOpen, onEdit, onFinalize }) {
+export function Home({ trips, loading, activeTab, setActiveTab, user, onLogout, onAccount, onNew, onOpen, onEdit, onFinalize }) {
   const filteredTrips = trips.filter((trip) => (activeTab === "proximas" ? trip.status !== "finalizada" : trip.status === "finalizada"));
   const nextTrips = trips.filter((trip) => trip.status !== "finalizada").length;
   const finishedTrips = trips.filter((trip) => trip.status === "finalizada").length;
 
   return (
     <>
+      <div className="page-user-bar">
+        <UserMenu user={user} onAccount={onAccount} onLogout={onLogout} />
+      </div>
+
       <header className="notebook-cover">
         <div className="cover-copy">
           <span className="eyebrow">Viajário</span>
           <h1>Diário pessoal de viagens.</h1>
           {user ? <p>Olá, {user.name}. Aqui ficam suas viagens, fotos e memórias.</p> : null}
+          {user && (!user.emailVerifiedAt || user.pendingEmail) ? (
+            <p className="account-inline-warning">Confirme o e-mail {user.pendingEmail || user.email} para manter sua conta segura.</p>
+          ) : null}
           <p>Guarde planos, fotos, reservas e lembranças em um diário que já começa antes do embarque.</p>
           <div className="cover-actions">
             <button className="button primary" onClick={onNew}>Nova viagem</button>
-            <button className="button ghost" onClick={onLogout}>Sair</button>
           </div>
         </div>
         <div className="cover-board" aria-label="Capa visual do diário de viagem">
@@ -72,7 +80,6 @@ export function Home({ trips, loading, activeTab, setActiveTab, user, onLogout, 
           <button className={activeTab === "finalizadas" ? "active" : ""} onClick={() => setActiveTab("finalizadas")}>Finalizadas</button>
         </div>
         <div className="actions">
-          <button className="button ghost" onClick={onLogout}>Sair</button>
           <button className="button primary" onClick={onNew}>Nova viagem</button>
         </div>
       </section>

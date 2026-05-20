@@ -44,9 +44,19 @@ Funcionalidades principais do MVP:
 ### Autenticacao
 
 - O sistema deve permitir criar uma conta com nome, e-mail e senha.
+- O cadastro deve exigir confirmacao da senha.
+- O cadastro deve exigir senha forte com no minimo 8 caracteres, letra maiuscula, letra minuscula, numero e simbolo.
+- O cadastro deve bloquear e-mails ja cadastrados.
+- O sistema deve enviar um link para confirmar o e-mail informado no cadastro.
+- O sistema deve permitir reenviar o link de confirmacao de e-mail com limite de tentativas.
 - O sistema deve permitir fazer login com e-mail e senha.
 - O sistema deve manter a sessao ativa ao recarregar a pagina.
 - O sistema deve permitir fazer logout.
+- O sistema deve exibir aviso quando o e-mail da pessoa usuaria ainda nao foi confirmado.
+- O sistema deve permitir abrir um menu minimalista de usuario com as opcoes Minha conta e Sair.
+- O sistema deve permitir editar nome, e-mail e senha em Minha conta.
+- A alteracao de e-mail deve exigir senha atual e nova confirmacao por link.
+- A alteracao de senha deve exigir senha atual e confirmacao da nova senha.
 - O sistema deve associar cada viagem ao usuario logado.
 - O sistema deve impedir que um usuario acesse viagens de outro usuario.
 - O sistema deve redirecionar pessoas nao autenticadas para a tela de login.

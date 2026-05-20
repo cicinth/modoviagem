@@ -1,8 +1,10 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333/api";
+const localApiHost = typeof window !== "undefined" ? window.location.hostname : "localhost";
+const API_URL = import.meta.env.VITE_API_URL || `http://${localApiHost}:3333/api`;
 
 async function request(path, options = {}) {
   const { token, headers = {}, ...rest } = options;
   const response = await fetch(`${API_URL}${path}`, {
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -26,7 +28,11 @@ async function request(path, options = {}) {
 export const authApi = {
   register: (payload) => request("/auth/register", { method: "POST", body: JSON.stringify(payload) }),
   login: (payload) => request("/auth/login", { method: "POST", body: JSON.stringify(payload) }),
-  me: (token) => request("/auth/me", { token })
+  me: (token) => request("/auth/me", { token }),
+  logout: () => request("/auth/logout", { method: "POST" }),
+  updateMe: (payload) => request("/auth/me", { method: "PATCH", body: JSON.stringify(payload) }),
+  resendVerification: () => request("/auth/email-verification/resend", { method: "POST" }),
+  confirmEmail: (token) => request("/auth/confirm-email", { method: "POST", body: JSON.stringify({ token }) })
 };
 
 export const tripsApi = {

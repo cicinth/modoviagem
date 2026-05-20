@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { authApi, tripsApi } from "./api.js";
 import { AuthForm } from "./features/auth/AuthForm.jsx";
+import { AccountModal } from "./features/auth/UserMenu.jsx";
+import { EmailConfirmationPage } from "./features/auth/EmailConfirmationPage.jsx";
 import { Detail } from "./features/trips/Detail.jsx";
 import { Home } from "./features/trips/Home.jsx";
 import { ItineraryPage } from "./features/trips/ItineraryPage.jsx";
@@ -22,6 +24,10 @@ export function App() {
   const [authToken, setAuthToken] = useState("");
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [accountLoading, setAccountLoading] = useState(false);
+  const [accountError, setAccountError] = useState("");
+  const [accountMessage, setAccountMessage] = useState("");
 
   const selectedTripFromList = useMemo(() => {
     if (!selectedTrip?.id) return selectedTrip;
@@ -35,9 +41,6 @@ export function App() {
     try {
       setTrips(await tripsApi.list(token));
     } catch (apiError) {
-      if (apiError.message.includes("Sess") || apiError.message.includes("Autentica")) {
-        handleLogout();
-      }
       setError(apiError.message);
     } finally {
       setLoading(false);
@@ -49,20 +52,24 @@ export function App() {
       const rawSession = localStorage.getItem(authStorageKey);
 
       if (!rawSession) {
+        setLoading(false);
         setSessionLoading(false);
         return;
       }
 
       try {
         const session = JSON.parse(rawSession);
+        setAuthUser(session.user || null);
+        setAuthToken(session.token || "");
+
         const response = await authApi.me(session.token);
         setAuthUser(response.user);
-        setAuthToken(session.token);
-        await loadTrips(session.token);
-      } catch {
-        localStorage.removeItem(authStorageKey);
-        setAuthUser(null);
         setAuthToken("");
+        localStorage.setItem(authStorageKey, JSON.stringify({ user: response.user }));
+        await loadTrips();
+      } catch (apiError) {
+        setError(apiError.message || "Não foi possível atualizar a sessão agora.");
+        setLoading(false);
       } finally {
         setSessionLoading(false);
       }
@@ -71,15 +78,23 @@ export function App() {
     restoreSession();
   }, []);
 
-  async function handleAuthenticated(user, token) {
+  async function handleAuthenticated(user, _token) {
     setAuthUser(user);
-    setAuthToken(token);
-    localStorage.setItem(authStorageKey, JSON.stringify({ user, token }));
+    setAuthToken("");
+    localStorage.setItem(authStorageKey, JSON.stringify({ user }));
     setAuthError("");
-    await loadTrips(token);
+    await loadTrips();
+  }
+
+  function handleEmailConfirmed(user) {
+    setAuthUser(user);
+    setAuthToken("");
+    localStorage.setItem(authStorageKey, JSON.stringify({ user }));
+    loadTrips();
   }
 
   function handleLogout() {
+    authApi.logout().catch(() => {});
     localStorage.removeItem(authStorageKey);
     setAuthUser(null);
     setAuthToken("");
@@ -165,7 +180,8 @@ export function App() {
       const response = await authApi.register({
         name: form.name,
         email: form.email,
-        password: form.password
+        password: form.password,
+        passwordConfirmation: form.passwordConfirmation
       });
 
       await handleAuthenticated(response.user, response.token);
@@ -174,6 +190,49 @@ export function App() {
     } finally {
       setAuthLoading(false);
     }
+  }
+
+  async function updateAccount(form) {
+    setAccountLoading(true);
+    setAccountError("");
+    setAccountMessage("");
+
+    try {
+      const payload = {
+        name: form.name,
+        email: form.email,
+        currentPassword: form.currentPassword,
+        newPassword: form.newPassword,
+        newPasswordConfirmation: form.newPasswordConfirmation
+      };
+      const response = await authApi.updateMe(payload);
+      setAuthUser(response.user);
+      localStorage.setItem(authStorageKey, JSON.stringify({ user: response.user }));
+      setAccountMessage("Conta atualizada.");
+    } catch (apiError) {
+      setAccountError(apiError.message);
+    } finally {
+      setAccountLoading(false);
+    }
+  }
+
+  async function resendVerification() {
+    setAccountLoading(true);
+    setAccountError("");
+    setAccountMessage("");
+
+    try {
+      const response = await authApi.resendVerification();
+      setAccountMessage(response.message);
+    } catch (apiError) {
+      setAccountError(apiError.message);
+    } finally {
+      setAccountLoading(false);
+    }
+  }
+
+  if (window.location.pathname === "/confirmar-email") {
+    return <EmailConfirmationPage onConfirmed={handleEmailConfirmed} />;
   }
 
   if (sessionLoading) {
@@ -216,6 +275,11 @@ export function App() {
           setActiveTab={setActiveTab}
           user={authUser}
           onLogout={handleLogout}
+          onAccount={() => {
+            setAccountError("");
+            setAccountMessage("");
+            setAccountOpen(true);
+          }}
           onNew={() => {
             setSelectedTrip(null);
             setFormReturnView("home");
@@ -251,6 +315,17 @@ export function App() {
         <ItineraryPage
           trip={selectedTripFromList}
           onBack={() => setView("detail")}
+        />
+      ) : null}
+      {accountOpen ? (
+        <AccountModal
+          user={authUser}
+          loading={accountLoading}
+          error={accountError}
+          message={accountMessage}
+          onClose={() => setAccountOpen(false)}
+          onSave={updateAccount}
+          onResendVerification={resendVerification}
         />
       ) : null}
     </main>

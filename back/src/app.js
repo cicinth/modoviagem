@@ -3,13 +3,16 @@ import express from "express";
 import { env } from "./config/env.js";
 import { authRouter } from "./modules/auth/routes/authRoutes.js";
 import { errorHandler } from "./shared/middlewares/errorHandler.js";
+import { securityHeaders } from "./shared/middlewares/securityHeaders.js";
 import { notFoundHandler } from "./shared/middlewares/notFoundHandler.js";
 import { tripsRouter } from "./modules/trips/routes/tripRoutes.js";
 
 export function createApp() {
   const app = express();
 
-  app.use(cors({ origin: env.frontOrigins }));
+  app.disable("x-powered-by");
+  app.use(securityHeaders);
+  app.use(cors({ origin: env.frontOrigins, credentials: true }));
   app.use(express.json({ limit: "2mb" }));
 
   app.get("/api/health", (_request, response) => {

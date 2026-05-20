@@ -1,0 +1,4 @@
+UPDATE "trips"
+SET "user_id" = '22222222-2222-2222-2222-222222222222',
+    "updated_at" = CURRENT_TIMESTAMP
+WHERE "id" = '2183df34-f43d-46db-8620-7a0a30bdb0d4';
